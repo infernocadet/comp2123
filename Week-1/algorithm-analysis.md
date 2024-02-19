@@ -1,3 +1,7 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
 # Algorithm Analysis
 ***
 
@@ -8,10 +12,6 @@ Algorithms are a **set of instructions used to solve a problem**.
 Data structures are formats for storing, managing, working with or structuring data or information.
 Every data structure has advantages and disdvantages.
 
-<div style="width:20%; margin: auto;">
+<div class="center-image">
     ![Array](https://github.com/infernocadet/comp2123/blob/main/graphics/Screenshot%202024-02-19%20at%2011.48.14%20pm.png)
-</div>
-
-<div style="text-align:center">
-    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/Screenshot%202024-02-19%20at%2011.48.14%20pm.png" alt="Array">
 </div>
