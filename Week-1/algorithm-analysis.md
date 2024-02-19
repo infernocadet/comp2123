@@ -21,5 +21,8 @@ Every data structure has advantages and disdvantages.
 **Linked List**
 
 ![Linked List](https://github.com/infernocadet/comp2123/blob/main/graphics/Screenshot%202024-02-20%20at%2012.02.46%20am.png)
+
+<img src="https://github.com/infernocadet/comp2123/blob/main/graphics/Screenshot%202024-02-20%20at%2012.02.46%20am.png" alt="linked list" width="200/>
+
 *Pros*: Dynamic sizing.
-*Cons*: Low efficiency in accessing elemtns compared to array.
+*Cons*: Low efficiency in accessing elements compared to array.
