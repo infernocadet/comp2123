@@ -43,3 +43,15 @@ We can now try to put algorithm into psuedocode, a flexible style of code logic.
 <p align="center">
     <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/Screenshot%202024-02-20%20at%2012.35.14%20am.png" alt="algorithm-psuedocode" width="350" height="auto">
 </p>
+
+When this *Insertion Sort Algorithm* is adapted into Python for example, it'll look like this:
+
+```python
+# Insertion Sort
+for i in range(1, len(array)):
+    key = array[i]
+    j = i - 1
+    while j >= 0 and array[j] > key:
+        array[j + 1] = array[j]
+        j -= 1
+    array[j = 1] = key
