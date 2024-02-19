@@ -13,14 +13,12 @@ Every data structure has advantages and disdvantages.
 
 **Arrays**
 
-![Array](https://github.com/infernocadet/comp2123/blob/main/graphics/Screenshot%202024-02-19%20at%2011.48.14%20pm.png)
+<img src="https://github.com/infernocadet/comp2123/blob/main/graphics/Screenshot%202024-02-19%20at%2011.48.14%20pm.png" alt="array" width="350" height="auto"/>
 
 *Pros*: Highly efficient in accessing elements.
 *Cons*: Fixed size once initialised.
 
 **Linked List**
-
-![Linked List](https://github.com/infernocadet/comp2123/blob/main/graphics/Screenshot%202024-02-20%20at%2012.02.46%20am.png)
 
 <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/Screenshot%202024-02-20%20at%2012.02.46%20am.png" alt="linked list" width="200" height="auto"/>
 
