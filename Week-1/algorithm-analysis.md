@@ -11,7 +11,7 @@ Algorithms are a **set of instructions used to solve a problem**.
 Data structures are formats for storing, managing, working with or structuring data or information.
 Every data structure has advantages and disdvantages.
 
-**Arrays**
+### Arrays
 
 <p align="center">
     <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/Screenshot%202024-02-19%20at%2011.48.14%20pm.png" alt="array" width="350" height="auto"/>
@@ -55,3 +55,8 @@ for i in range(1, len(array)):
         array[j + 1] = array[j]
         j -= 1
     array[j = 1] = key
+```
+
+## Three Abstractions
+
+
