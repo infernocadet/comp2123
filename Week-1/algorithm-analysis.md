@@ -23,7 +23,7 @@ An array is a contiguous block of memory, which stores a collection of elements 
 
 *Cons*: Fixed size once initialised.
 
-**Linked List**
+### Linked List
 
 <p align="center">
     <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/Screenshot%202024-02-20%20at%2012.02.46%20am.png" alt="linked-list" width="350" height="auto">
@@ -58,5 +58,20 @@ for i in range(1, len(array)):
 ```
 
 ## Three Abstractions
+
+### Computational problem
+- defines a computational task
+- specifies what the input is, and what the output should be
+
+### Algorithm
+- a step-by-step recipe to go from input to output (**what** your solution does)
+- different from implementation
+
+### Correctness and complexity analysis
+- a formal proof that the algorithm solves the problem (**why** is what your solution does correct)
+- analytical bound on the resources it uses
+- what the running time of the algorithm is
+
+
 
 
