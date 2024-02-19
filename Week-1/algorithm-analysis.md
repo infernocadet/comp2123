@@ -88,7 +88,7 @@ for i in range(1, len(array)):
 - analytical bound on the resources it uses
 - what the running time of the algorithm is
 
-**Example**
+#### Example
 
 *Computational problem*: 
 We are given an array *A* of integers and we need to return the maximum.
@@ -107,3 +107,20 @@ We maintain the following invariant: after the *k*-th iteration, *max* stores th
 
 Prove using induction: $$\text{when }k=0,\text{ }max = -∞$$ which is the maximum of the first 0 elements.
 
+Assume the invariant holds for the first *k* iterations, and show that it holds after the *(k+1)th* iteration. In that iteration, we compare *max* to *A[k]* and update *max* if *A[k]* is larger. Hence, *max* is the maximum of the first *k+1* elements.
+
+The **invariant** implies that after *n* iterations, *max* contains the maximum of the first *n* elements.
+
+#### Example
+
+*Motivation*
+- we have information about the daily fluctuation of a stock price
+- we want to evaluate our best possible single-trade outcome
+
+*Input*
+- an array with *n* integer values A[0], A[1], ..., A[n-1]
+
+*Task*
+- find indices: $$0 <= i <= j < n$$
+which maximises
+$$A[i] + A[i+1]+ ... A[j]$$
