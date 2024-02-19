@@ -105,5 +105,5 @@ Then we return the maximum we found.
 *Correctness*:
 We maintain the following invariant: after the *k*-th iteration, *max* stores the maximum of the first *k* elements.
 
-Prove using induction: when $$k=0$$, *max* = -∞, which is the maximum of the first 0 elements.
+Prove using induction: $$when k=0, max = -∞$$ which is the maximum of the first 0 elements.
 
