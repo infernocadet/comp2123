@@ -13,9 +13,9 @@ Every data structure has advantages and disdvantages.
 
 **Arrays**
 
-<div aligh="center">
+<p aligh="center">
     <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/Screenshot%202024-02-19%20at%2011.48.14%20pm.png" alt="array" width="350" height="auto"/>
-</div>
+</p>
 
 *Pros*: Highly efficient in accessing elements.
 *Cons*: Fixed size once initialised.
