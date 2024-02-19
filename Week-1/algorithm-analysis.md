@@ -57,6 +57,22 @@ for i in range(1, len(array)):
     array[j = 1] = key
 ```
 
+**Control flow**
+
+- if ... then ... [else ...]
+- while ... do ...
+- repeat ... until ...
+- for ... do ...
+- indentation replaces braces
+
+**Method call**
+
+- method (arg [, arg...])
+
+**Return value**
+
+- return *expression*
+
 ## Three Abstractions
 
 ### Computational problem
@@ -71,6 +87,17 @@ for i in range(1, len(array)):
 - a formal proof that the algorithm solves the problem (**why** is what your solution does correct)
 - analytical bound on the resources it uses
 - what the running time of the algorithm is
+
+**Example**
+
+*Computational problem*: 
+We are given an array *A* of integers and we need to return the maximum.
+
+*Algorithm*: We go through all elements of the array in order, and keep track of the largest element.
+For each position *i*, we check if the value stored at *A[i]* is larger than our current max, and if so update the max.
+Then we return the maximum we found.
+
+
 
 
 
