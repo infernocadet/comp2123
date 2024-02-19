@@ -22,7 +22,7 @@ Every data structure has advantages and disdvantages.
 
 ![Linked List](https://github.com/infernocadet/comp2123/blob/main/graphics/Screenshot%202024-02-20%20at%2012.02.46%20am.png)
 
-<img src="https://github.com/infernocadet/comp2123/blob/main/graphics/Screenshot%202024-02-20%20at%2012.02.46%20am.png" alt="linked list" width="200/>
+<img src="https://github.com/infernocadet/comp2123/blob/main/graphics/Screenshot%202024-02-20%20at%2012.02.46%20am.png" alt="linked list" width="200" height="auto"/>
 
 *Pros*: Dynamic sizing.
 *Cons*: Low efficiency in accessing elements compared to array.
