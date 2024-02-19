@@ -93,12 +93,17 @@ for i in range(1, len(array)):
 *Computational problem*: 
 We are given an array *A* of integers and we need to return the maximum.
 
-*Algorithm*: We go through all elements of the array in order, and keep track of the largest element.
+*Algorithm*: 
+We go through all elements of the array in order, and keep track of the largest element.
 For each position *i*, we check if the value stored at *A[i]* is larger than our current max, and if so update the max.
 Then we return the maximum we found.
 
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/Screenshot%202024-02-20%20at%201.19.01%20am.png" alt="psuedocode" width="350" height="auto">
+</p>
 
+*Correctness*:
+We maintain the following invariant: after the *k*-th iteration, *max* stores the maximum of the first *k* elements.
 
-
-
+Prove using induction: when $$k=0$$, *max* = -∞, which is the maximum of the first 0 elements.
 
