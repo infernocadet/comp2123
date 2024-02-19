@@ -3,7 +3,6 @@
 </head>
 
 # Algorithm Analysis
-***
 
 # Algorithms
 Algorithms are a **set of instructions used to solve a problem**.
@@ -12,6 +11,13 @@ Algorithms are a **set of instructions used to solve a problem**.
 Data structures are formats for storing, managing, working with or structuring data or information.
 Every data structure has advantages and disdvantages.
 
-<div class="center-image">
-    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/Screenshot%202024-02-19%20at%2011.48.14%20pm.png" alt="Array">
-</div>
+**Arrays**
+![Array](https://github.com/infernocadet/comp2123/blob/main/graphics/Screenshot%202024-02-19%20at%2011.48.14%20pm.png)
+
+*Pros*: Highly efficient in accessing elements.
+*Cons*: Fixed size once initialised.
+
+**Linked List**
+![Linked List]()
+*Pros*: Dynamic sizing.
+*Cons*: Low efficiency in accessing elemtns compared to array.
