@@ -184,4 +184,4 @@ If *n* is multiplied by 2, then we expect *T(n)* to be multiplied by 4.
 
 Asymptotic growth analysis gives us a tool for focusing on the terms that make up *T(n)*, which **dominate** the running time.
 
-==Asymptotic growth analysis is Big-O notation== and provides a coarser but sufficient way to summarise how *T(n)* behaves when *n* increases.
+<mark>Asymptotic growth analysis is Big-O notation</mark> and provides a coarser but sufficient way to summarise how *T(n)* behaves when *n* increases.
