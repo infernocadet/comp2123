@@ -175,4 +175,13 @@ Let *T(n)* be the worst-case number of steps of our algorithm on an instance of 
 
 **Example**: $$T(n)=4n^{2}+4n+5, \text{or } T(n) = 5n^{2}-2n+100$$
 
-Which one is better? Do these constants really matter?
+Which one is better? Do these constants really matter? Constants don't matter in **asymptotic growth analysis**.
+
+**Insight**: in both examples, the worst-case number of steps *T(n)* grew *quadratically* with *n*.
+If *n* is multiplied by 2, then we expect *T(n)* to be multiplied by 4.
+
+**Generally**: if *T(n)* is a polynomial of degree *d*, then doubling the size of the input should roughly increase the running time by a factor of 2^d^.
+
+Asymptotic growth analysis gives us a tool for focusing on the terms that make up *T(n)*, which **dominate** the running time.
+
+==Asymptotic growth analysis is Big-O notation== and provides a coarser but sufficient way to summarise how *T(n)* behaves when *n* increases.
