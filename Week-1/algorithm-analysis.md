@@ -164,6 +164,6 @@ Our definition should be **objective**:
 
 ### Definition
 An algorithm is efficient if it runs in **polynomial time**; that is, on an instance of size *n*, it performances no more than *p(n)* steps for some polynominal:
-$$p(x)=a_{d}x^{d}+\dots+a_{1}x+a_{0}
+$$p(x)=a_{d}x^{d}+ \dots +a_{1}x+a_{0}$$
 
 This gives us some information about the expected behaviour of the algorithm, and is useful for making predictions and comparing different algorithms.
