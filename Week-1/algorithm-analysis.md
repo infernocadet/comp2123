@@ -190,4 +190,4 @@ Asymptotic growth analysis gives us a tool for focusing on the terms that make u
 We say that:
 $$T(n) = O(f(n)) \text{ if}$$
 $$\text{there exists } n_{0}, c > 0 \text{ such that } T(n) <= cf(n) \text{ for all }n>n_{0}$$
-This essentially means, the worst case scenario *T(n)* is less than or equal to *f(n)* multiplied by a constant *c*, for all n>n_0_.
+This essentially means, the worst case scenario *T(n)* is less than or equal to *f(n)* multiplied by a constant *c*, for all *n>n~0~.*
