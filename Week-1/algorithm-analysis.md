@@ -52,9 +52,9 @@ for i in range(1, len(array)):
     key = array[i]
     j = i - 1
     while j >= 0 and array[j] > key:
-        array[j + 1] = array[j]
+        array[j+1] = array[j]
         j -= 1
-    array[j = 1] = key
+    array[j+1] = key
 ```
 
 **Control flow**
@@ -137,3 +137,33 @@ High level description:
 <p align="center">
     <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/naive%20preprocessing.png" alt="naive psuedocode" width="350" height="auto">
 </p>
+
+## Efficiency
+
+**Definition**
+*An algorithm is efficent if it runs quickly on real input instances.*
+
+This is not a good definition because it is not easy to evaluate:
+- instances considered
+- implementation details
+- hardware it runs on
+
+Our definition should be **implementation independent**:
+- count number of "steps"
+- bound the algorithm's **worst case performance**
+
+**An algorithm is efficient if it achieves qualitatively better worst-case performance than a brute-force approach**
+
+Not a good definition because it is subjective:
+- brute-force approach is ill-defined
+- qualitatively better is ill-defined
+
+Our definition should be **objective**:
+- not tied to a strawman baseline
+- independently agreed upon
+
+### Definition
+An algorithm is efficient if it runs in **polynomial time**; that is, on an instance of size *n*, it performances no more than *p(n)* steps for some polynominal:
+$$p(x)=a_{d}x^{d}+\dots+a_{1}x+a_{0}
+
+This gives us some information about the expected behaviour of the algorithm, and is useful for making predictions and comparing different algorithms.
