@@ -189,4 +189,4 @@ Asymptotic growth analysis gives us a tool for focusing on the terms that make u
 #### Definition
 We say that:
 $$T(n) = O(f(n)) \text{if}$$
-$$\text{there exists} n_{0}, c > 0 \text{such that} T(n) <= cf(n) \text{for all }n>n_{0}$$
+$$\text{there exists } n_{0}, c > 0 \text{ such that } T(n) <= cf(n) \text{f or all }n>n_{0}$$
