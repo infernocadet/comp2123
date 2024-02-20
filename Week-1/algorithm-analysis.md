@@ -124,3 +124,16 @@ The **invariant** implies that after *n* iterations, *max* contains the maximum 
 - find indices: $$0 <= i <= j < n$$
 which maximises
 $$A[i] + A[i+1]+ ... A[j]$$
+
+In simple english, this just means: given an array A of integers, find a pair of indexes, i and j, such that the sum of A[i] + A[i+1] + ... A[j] is maximised. So, both i and j can point to the same value and sum it twice, or they can be right next to each other, or if all the values are positive, then i and j can extend over the whole range of the array.
+
+### Naive algorithm
+High level description:
+    - Iterate over every pair $$0 <= i <= j < n$$
+    - For each, compute $$A[i] + A[i+1]+ ... A[j]$$
+    - Return the pair with the maximum value
+
+#### Naive preprocessing (psuedocode)
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/naive%20preprocessing.png" alt="naive psuedocode" width="350" height="auto">
+</p>
