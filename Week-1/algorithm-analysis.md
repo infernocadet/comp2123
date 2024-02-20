@@ -167,3 +167,12 @@ An algorithm is efficient if it runs in **polynomial time**; that is, on an inst
 $$p(x)=a_{d}x^{d}+ \dots +a_{1}x+a_{0}$$
 
 This gives us some information about the expected behaviour of the algorithm, and is useful for making predictions and comparing different algorithms.
+
+## Asymptotic growth analysis
+Let *T(n)* be the worst-case number of steps of our algorithm on an instance of size *n*.
+
+**Problem**: figuring out *T(n) exactly* may be really hard.
+
+**Example**: $$T(n)=4n^{2}+4n+5, \text{or } T(n) = 5n^{2}-2n+100$$
+
+Which one is better? Do these constants really matter?
