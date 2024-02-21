@@ -190,4 +190,18 @@ Asymptotic growth analysis gives us a tool for focusing on the terms that make u
 We say that:
 $$T(n) = O(f(n)) \text{ if}$$
 $$\text{there exists } n_{0}, c > 0 \text{ such that } T(n) <= cf(n) \text{ for all }n>n_{0}$$
-This essentially means, the worst case scenario *T(n)* is less than or equal to *f(n)* multiplied by a constant *c*, for all *n>n~0~.*
+This essentially means, the worst case scenario *T(n)* is not faster than *f(n)* multiplied by a constant *c*, for all *n*.
+
+Take for example:
+$$T(n) = 32n^2 + 17n = 32$$
+*T(n)* is *O(n^2^)* and *O(n^3^)*, because it is faster than *O(n^2^)* and *O(n^3^)*, but not *O(n)*.
+
+#### Definition
+We say that:
+$$T(n) = \OMEGA(f(n)) \text{ if}$$
+$$\text{there exists } n_{0}, c > 0 \text{ such that } T(n) >= cf(n) \text{ for all }n>n_{0}$$
+This essentially means that the worst case scenario *T(n)* is slower or more steps than *cf(n)* for all *n*
+
+Take for example:
+$$T(n) = 32n^2 + 17n = 32$$
+*T(n)* is *O(n^2^)* and *O(n)*, because it is slower than *O(n^2^)* and *O(n)*, but not *O(n^3^)*.
