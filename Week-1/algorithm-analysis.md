@@ -204,4 +204,4 @@ This essentially means that the worst case scenario *T(n)* is slower or more ste
 
 Take for example:
 $$T(n) = 32n^2 + 17n = 32$$
-*T(n)* is *O(n^2)* and *O(n)*, because it is slower than *O(n^2)* and *O(n)*, but not *O(n^3)*.
+*T(n)* is *\Omega(n^2)* and *O(n)*, because it is slower than *O(n^2)* and *O(n)*, but not *O(n^3)*.
