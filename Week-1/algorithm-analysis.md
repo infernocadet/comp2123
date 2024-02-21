@@ -198,7 +198,7 @@ $$T(n) = 32n^2 + 17n = 32$$
 
 #### Definition
 We say that:
-$$T(n) = \omega (f(n)) \text{ if}$$
+$$T(n) = \Omega (f(n)) \text{ if}$$
 $$\text{there exists } n_{0}, c > 0 \text{ such that } T(n) >= cf(n) \text{ for all }n>n_{0}$$
 This essentially means that the worst case scenario *T(n)* is slower or more steps than *cf(n)* for all *n*
 
