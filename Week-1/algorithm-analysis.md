@@ -204,4 +204,52 @@ This essentially means that the worst case scenario *T(n)* is slower or more ste
 
 Take for example:
 $$T(n) = 32n^2 + 17n = 32$$
-*T(n)* is *\textOmega (n^2)* and *O(n)*, because it is slower than *O(n^2)* and *O(n)*, but not *O(n^3)*.
+*T(n)* is *\Ω(n^2)* and *Ω(n)*, because it is slower than *f(n^2)* and *f(n)*, but not *f(n^3)*.
+
+#### Definition
+We say that:
+$$T(n) = \Theta (f(n)) \text{ if}$$
+$$T(n) = O(f(n)) \text{ and } T(n) = \Omega (f(n))$$
+
+### In Summary
+Think like this:
+- *T(n)* = *O(f(n))*: *T(n)* is "smaller" than *f(n)* up to a constant factor
+- *T(n)* = *Ω(f(n))*: *T(n)* is "bigger" than *f(n)* up to a constant factor
+- *T(n)* = *Θ(f(n))*: *T(n)* is "equal" to *f(n)* up to a constant factor
+
+**Important**: Asymptotic growth analysis is just a mathematical tool used to compare functions when the input ```n``` grows. We are using this tool to analyse the worst-case behaviour of algorithms. 
+
+### Examples of asymptotic growth
+
+**Polynomial**
+*O(n^c^)*, considered efficient since most algorithsm have small **c**.
+
+**Logarithmic**
+*O(log(n))*, typical for search algorithms like Binary Search
+
+**Exponential**
+*O(2^n^)*, typical for brute force algorithms exploring all possible combinations of elements.
+
+### Comparison of running times
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/comparison-of-running-times.png" alt="comparison" width="350" height="auto">
+</p>
+
+## Properties of asymptotic growth
+Asymptotic analysis is a tool which ```allows us to ignore unimportant details and focus on important things.```
+
+**Transitivity**
+- If *f=O(g)* and *g=O(h)* then *f=O(h)*
+- If *f=Ω(g)* and *g=Ω(h)* then *f=Ω(h)*
+- If *f=Θ(g)* and *g=Θ(h)* then *f=Θ(h)*
+
+**Sums of functions**
+- If *f=O(g)* and *g=O(h)* then *f + g = O(h)*
+- If *f=Ω(h)* then *f + g = Ω(h)*
+
+### Common running times
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/common-running-times.png" alt="common" width="350" height="auto">
+</p>
