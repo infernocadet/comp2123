@@ -11,4 +11,4 @@ def consecutive(k):
             return True
     return False
 
-print(consecutive(3))
+print(consecutive(5))
