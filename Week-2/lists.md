@@ -35,6 +35,8 @@ Client code can have variables which are instances of the data structure class, 
 ## Index-Based Lists (List ADT)
 An index-based list typically supports the following operations:
 
-```size```      (int) number of elements in the store
-
-```isEmpty()``` (boolean) whether or not the store is empty
+- ```size``` (int) number of elements in the store
+- ```isEmpty()``` (boolean) whether or not the store is empty
+- ```get(i)``` return element at index ```i```
+- ```set(i,e)``` replace element at index ```i``` with element ```e```, and return element that was replaced
+- ```add(i,e)``` insert element ```e``` at index ```i``` existing elements with ```index >= i``` are shifted up
