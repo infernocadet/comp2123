@@ -32,7 +32,7 @@ A data structure implementation is a class that inherits from the abc, provides 
 
 Client code can have variables which are instances of the data structure class, and can call methods on the variables
 
-## Index-Based Lists (List ADT)
+### Index-Based Lists (List ADT)
 An index-based list typically supports the following operations:
 
 - ```size``` (int) number of elements in the store
@@ -40,3 +40,18 @@ An index-based list typically supports the following operations:
 - ```get(i)``` return element at index ```i```
 - ```set(i,e)``` replace element at index ```i``` with element ```e```, and return element that was replaced
 - ```add(i,e)``` insert element ```e``` at index ```i``` existing elements with ```index >= i``` are shifted up
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/list-operations.png" alt="comparison" width="350" height="auto">
+</p>
+
+### Array-based Lists
+An option for implementing the list ADT is to use an array ```A```, where ```A[i]``` stores (*a reference to*) the element with index ```i```. If array has size ```N```, then we can represent lists of size ```n <= N```. Large ```N``` is the size of the data structure while small ```n``` is the size of the list.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/array-based-list.png" alt="comparison" width="350" height="auto">
+</p>
+
+#### Array-based Lists: ```get(i)```
+The ```get(i)``` and ```set(i,e)``` methods are easy to implement by accessing ```A[i]```. Must check that ```i``` is a legitimate index (```0<=i<=n```)
+
