@@ -31,3 +31,9 @@ An *abc* declares methods (with names and signatures) without providing code, an
 A data structure implementation is a class that inherits from the abc, provides code for all the required methods, and has a constructor.
 
 Client code can have variables which are instances of the data structure class, and can call methods on the variables
+
+## Index-Based Lists (List ADT)
+An index-based list typically supports the following operations:
+
+```size```  (int) number of elements in the store
+```isEmpty()``` (boolean) whether or not the store is empty
