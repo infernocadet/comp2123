@@ -491,6 +491,11 @@ These are related as follows:
     <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/wrapped.png" alt="comparison" width="350" height="auto">
 </p>
 
+**Queue implementation based on arrays**
+Performance:
+- The space used is ```O(N)```
+- Each operation runs in time ```O(1)```
+
 #### Queue Operations: ```enqueue(e)```
 Return error if array is full. Or grow underlying array as a dynamic array
 
@@ -502,4 +507,18 @@ def enqueue(e)
         end = (start + size) % N // mod N
         Q[end] = e
         size = size + 1
+```
+
+#### Queue Operations: ```dequeue(e)```
+Note that operation dequeue returns error if the queue is empty or return null
+
+```
+def dequeue(e)
+    if isEmpty() then
+        return "Queue empty"
+    else
+        e = Q[start]
+        start = start + 1 % N (mod N)
+        size = size - 1
+        return e
 ```
