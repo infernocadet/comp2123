@@ -359,3 +359,147 @@ To make a class *iterable*, define the method: ```__iter__(self)```.
 The method ```__iter__(self)``` returns an object having a ```next()``` method
 
 Calling ```next()``` returns the next object and advances the cursor or raises ```StopIteration()```.
+
+```
+for x in obj:
+    // process x
+```
+
+is equivalent to
+
+```
+it = x.__iter__()
+try:
+    while True:
+    x = it.next()
+    // process x
+except StopIteration:
+    pass
+```
+
+## Stacks and queues
+These ADTs are restricted forms of List, where insertions and removals only happen in particular locations
+- stacks follow last-in-first-out (LIFO)
+- queues follow first-in-first-out (FIFO)
+
+We use these less general ADT:
+- operations names are part of computing culture
+- numerous application
+- simpler/more efficient implementations than List
+
+### Stack ADT
+**Main stack operations**:
+- ```push(e)```: inserts an element, ```e```
+- ```pop()```: removes and returns the last inserted element
+
+**Auxilliary stack operations**:
+- ```top()```: returns the last inserted element without removing it
+- ```size()```: returns the number of elements stored
+- ```isEmpty()```: indicates if it is empty
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/stackprocess.png" alt="comparison" width="350" height="auto">
+</p>
+
+**Stack applications**:
+Direct applications:
+- Keep track of a history that allows undoing (e.g. text editor)
+- Chain of method calls in a language supporting recursion
+- Context free grammars
+
+Indirect applications:
+- Auxillary DS
+- Component of other DS
+
+### Method Stacks
+The runtime environment keeps track of the chain of active methods with a stack, allowing **recursion**.
+
+When a method is called, the system pushes on the stack, a frame containing:
+- local variables and return value
+- program counter
+
+When a method ends, we pop its frame and pass control to the method on top.
+
+#### Stack implementation based on arrays
+A simple way of implementing the Stack ADT uses an array:
+- Array with capacity ```N```
+- Add elements from left to right
+- A variable ```t``` keeps track of the index of the top element.
+
+```
+def size()
+    return t + 1
+
+def pop()
+    if isEmpty() then
+        return null
+    else
+        t = t - 1
+        return S[t+1]
+```
+
+### Queue ADT
+Like a "one-way" array"
+
+**Main queue operations**:
+- ```enqueue(e)```: inserts element ```e```, at the end of the queue
+- ```dequeue(e)```: removes and returns element at the front of the queue
+
+**Auxillary queue operations**:
+- ```first()```: returns the element at the front without removing
+- ```size()```: returns the number of elements stored
+- ```isEmpty()```: indicates if there are no elements
+
+**Boundary cases**
+- Attempting execution of dequeue or first on empty queue brings error or returns null
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/queueprocess.png" alt="comparison" width="350" height="auto">
+</p>
+
+**Queue applications**:
+Buffering packets in streams such as video or audio
+
+Direct applications:
+- Waiting lists, bureaucracy
+- Access to shared resources (e.g., printer)
+- Multiprogramming
+
+Indirect application:
+- Part of other DS
+
+#### Queue implementation based on arrays
+Use array of size ```N``` in a circular fashion.
+Two variables keep track of the front and size
+- ```start```: index of the front element
+- ```end```: index past the last element
+- ```size```: number of stored elements
+
+These are related as follows:
+```end = (start + size) mod N```
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/queueimplementation.png" alt="comparison" width="350" height="auto">
+</p>
+
+**Wrapped-around configuration**
+- Enqueue ```N``` elements
+- Dequeue ```k < N``` elements
+- Enqueue ```k' < k``` elements
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/wrapped.png" alt="comparison" width="350" height="auto">
+</p>
+
+#### Queue Operations: ```enqueue(e)```
+Return error if array is full. Or grow underlying array as a dynamic array
+
+```
+def enqueue(e)
+    if size = N then
+        return "Queue full"
+    else
+        end = (start + size) % N // mod N
+        Q[end] = e
+        size = size + 1
+```
