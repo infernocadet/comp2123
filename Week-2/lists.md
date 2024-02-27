@@ -40,6 +40,7 @@ An index-based list typically supports the following operations:
 - ```get(i)``` return element at index ```i```
 - ```set(i,e)``` replace element at index ```i``` with element ```e```, and return element that was replaced
 - ```add(i,e)``` insert element ```e``` at index ```i``` existing elements with ```index ≥ i``` are shifted up
+- ```remove(i)``` remove and return the element at index ```i```
 
 <p align="center">
     <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/list-operations.png" alt="comparison" width="350" height="auto">
@@ -148,3 +149,25 @@ Space complexity:
 Time complexity:
 - both ```get(i)``` and ```set(i,e)``` take ```O(1)``` time
 - both ```add(i,e)``` and ```remove(i)``` take ```O(n)``` in the worst case
+
+### Positional Lists
+ADT for a list where we store elements at "positions".
+
+Position models the abstract notion of place where a single object is stored within a container data structure.
+
+Unlike index based lists, this keeps referring to the same entry even after insertion/deletion happens elsewhere in the collection.
+
+These are used for more dynamic sizes of data structures, whereas an index based, (static) list has a fixed size of ```N```.
+
+Position offers just one method:
+- ```element()```: return the element stored at the position entrance.
+
+- ```size``` (int) number of elements in the store
+- ```isEmpty()``` (boolean) whether or not the store is empty
+- ```first()``` return **position** of first element *(null if empty)*
+- ```last()``` return **position** of lasy element *(null if empty)*
+- ```before(p)``` return **position** immediately before ```p``` *(null if ```p``` is first)*
+- ```after(p)``` return **position** immediately after ```p``` *(null if ```p``` is last)*
+- ```insertBefore(p, e)``` insert ```e``` in front of the element at position ```p```.
+- ```insertAfter(p, e)``` insert ```e``` following the element at position ```p```.
+- ```remove(p)``` remove and return the element at index ```ip```
