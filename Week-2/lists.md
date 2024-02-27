@@ -73,6 +73,78 @@ Time complexity is ```O(1)``` constant time, independent of size of array ```N``
 #### Array-based Lists: ```set(i,e)```
 Go to the position in the array ```A[i]``` and set equal to the value of ```e```.
 
+**Psuedo-code**:
+```
+def set(i,e):
+# input: index i and value e
+# output: update ith element in list to e
+    if i < 0 or i >= n then
+        return "index out of bound
+    result = A[i]
+    A[i] = e
+    return result
+```
+
+Time complexity is ```O(1)``` constant time, independent of size of array ```N``` or represented list ```n```.
+
 <p align="center">
     <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/set-method.png" alt="comparison" width="350" height="auto">
 </p>
+
+#### Array-based Lists: ```add(i,e)```
+In an operation ```add(i,e)```, we must make room for the new element, by shifting forward ```n-i``` elements ```A[i],...,A[n-1]```.
+
+We also must check that there is space, such that ```n < N```.
+
+The worst case scenario is adding an element to the start of the list, in which case we need to move all elements, which is moving ```n-1``` elements, which is time complexity of ```O(n)``` in the worst case.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/add-method.png" alt="comparison" width="350" height="auto">
+</p>
+
+**Psuedo-code**:
+```
+def add(i,e):
+    if n = N then
+        return "array is full"
+    if i < n then
+        for j in [n-1, n-2, ..., i] do
+            A[j + 1] = A[j]
+    A[i] = e
+    n = n + 1
+```
+
+#### Array-based Lists: ```remove(i)```
+In an operation ```remove(i)```, we need to fill the hole left at position ```i``` by shifting backward ```n - i - 1``` elements ```A[i+1],...,A[n-1]```.
+
+We must also check that ```i``` is a legititmate index where ```0<=i<n```
+
+**Psuedo-code**:
+```
+def remove(i):
+    if i<0 or i>=n
+        return "index out of bound"
+    e = A[i]
+    if i < n-1
+        for j in [i, i+1,..., n-2] do
+            A[j] = A[j+1]
+    n = n-1
+    return e
+```
+
+Time complexity is ```O(n)``` in the worst case
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/remove-method.png" alt="comparison" width="350" height="auto">
+</p>
+
+### Summary of static Array-based Lists
+Limitations:
+- can represent lists up to capacity of the array (```n vs N```)
+
+Space complexity:
+- space used is ```O(N)```, whereas we would like it to be ```O(n)```
+
+Time complexity:
+- both ```get(i)``` and ```set(i,e)``` take ```O(1)``` time
+- both ```add(i,e)``` and ```remove(i)``` take ```O(n)``` in the worst case
