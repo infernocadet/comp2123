@@ -171,3 +171,60 @@ Position offers just one method:
 - ```insertBefore(p, e)``` insert ```e``` in front of the element at position ```p```.
 - ```insertAfter(p, e)``` insert ```e``` following the element at position ```p```.
 - ```remove(p)``` remove and return the element at index ```ip```
+
+### Singly Linked Lists
+A fundamental data structure, contains a series of ```Nodes```, each with a reference to the next node. The list is captured by reference (```head```) to the first ```Node```.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/singly-linked-list.png" alt="comparison" width="350" height="auto">
+</p>
+
+#### Node implements Position
+Each ```Node``` in a singly linked List stores:
+- its element, and
+- a link to the next ```node```.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/node.png" alt="comparison" width="350" height="auto">
+</p>
+
+#### Advice on working with linked structures
+- Draw the diagram showing the state
+- Show a location where you place carefully each of the instance variables (including references to nodes)
+- Be careful to step through dotted accesses e.g. p.next.next
+- Be careful about assignment to fields e.g. ```p.next = q``` or ```p.next.next = r```
+
+#### Linked List: ```first()```
+```first()```: return position of first element, null if empty.
+
+The time complexity is ```O(1)```.
+
+#### Linked List: ```last()```
+```last()```: return position of last element, null if empty.
+
+The time complexity is ```O(n)```.
+
+#### Linked List: ```insertFirst()```
+1. instantiate a new node ```x```.
+2. set ```e``` as element of ```x```.
+3. set ```x.next``` to point to (old) ```head``` (node)
+4. update list's head to point to ```x```
+
+The time complexity is ```O(1)```.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/insertFirst.png" alt="comparison" width="350" height="auto">
+</p>
+
+#### Linked List: ```removeFirst()```
+1. update ```head``` to point to next ```node```
+2. delete former first ```node```
+
+The time complexity is ```O(1)```.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/removeFirst.png" alt="comparison" width="350" height="auto">
+</p>
+
+#### Linked List: ```insertBefore()```
+```insertBefore()```: insert ```e``` in front of the element at position ```p```
