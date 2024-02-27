@@ -228,3 +228,134 @@ The time complexity is ```O(1)```.
 
 #### Linked List: ```insertBefore()```
 ```insertBefore()```: insert ```e``` in front of the element at position ```p```
+
+1. create node x with value e
+2. find node with position p (e.g. node d)
+3. point node x to node d
+4. find previous predecessor of node d, by traversing through the linked list, starting from the head (e.g. node c)
+5. point node c to node x.
+
+The time complexity is ```O(n)```. There is no constant-time way to find the predecessor of a node in a Singly Linked List.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/insertBefore.png" alt="comparison" width="350" height="auto">
+</p>
+
+### Doubly Linked Lists
+A natural way to implement a positional list is with a doubly-linked list, so it is easy to quick to find the position before
+
+Each ```Node``` in a ```Doubly Linked List``` stores
+- its element, and
+- a link to ```previous``` and ```next``` node
+
+- A sequence of Nodes, each with preference to ```prev``` and to ```next```
+- List captured by references, to its **Sentinel Nodes**
+- We also have a ```header``` *(only has a next)* and a ```trailer``` *(only has a prev)*
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/doubly-linked-list.png" alt="comparison" width="350" height="auto">
+</p>
+
+#### Doubly Linked List: ```insertBefore(p,e)```
+1. instantiate new Node ```x``` with element ```e```
+2. update ```x.previous``` to point to ```p.previous```
+3. update ```x.next``` to point to ```p```
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/insertBeforedoubly.png" alt="comparison" width="350" height="auto">
+</p>
+
+4. update ```p.prev.next``` to point to ```x``` (finds the node originally before ```p```, then makes that node point to ```x``` as its next)
+5. update ```p.prev``` to point to ```x```
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/insertbeforedoubly2.png" alt="comparison" width="350" height="auto">
+</p>
+
+**Pseudo-code**:
+```
+def insert_before(pos, elem)
+  // insert elem before pos
+  // assuming it is a legal pos
+    new_node <- create a new node
+    new_node.element <- elem
+    new_node.prev <- pos.prev
+    new_node.next <- pos
+    pos.prev.next <- new_node
+    pos.prev <- new_node
+
+    return new_node
+```
+
+#### Doubly Linked List: ```remove(p)```
+1. point p.prev.next to p.next
+2. point p.next.prev to p.prev
+3. return removed element
+
+**Pseudo-code**:
+```
+def remove(pos)
+  // remove pos from the list
+  // assuming it is a legal pos
+
+    pos.prev.next <- pos.next
+    pos.next.prev <- pos.prev
+
+    return pos.element
+```
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/removedoubly.png" alt="comparison" width="350" height="auto">
+</p>
+
+### Performance
+A **doubly linked list** can perform all of the accessor and update operations for a positional list in constant time ```O(1)```.
+
+Space complexity is ```O(n)```.
+
+Time complexity is ```O(1)```.
+
+|Method             |Time   |
+|-------------------|-------|
+|first()            |O(1)   |
+|last()             |O(1)   |
+|before(p)          |O(1)   |
+|after(p)           |O(1)   |
+|insert_before(p,e) |O(1)   |
+|insert_after(p,e)  |O(1)   |
+|remove(p)          |O(1)   |
+|size()             |O(1)   |
+|is_empty()         |O(1)   |
+
+### Array vs Linked List
+**Linked List**
+- good match to positional ADT
+- efficient insertion and deletion
+- simpler behaviour as collection grows
+- modifications can be made as collection iterated over
+- space not wasted by list not having maximum capacity
+
+**Arrays**
+- good match to index-based ADT
+- caching makes traversal fast
+- no extra memory needed to store pointers
+- allow random access (retrieve element by index)
+
+## Iterators
+Abstracts the process of stepping through a collection of elements one at a time, by extending the concept of position.
+
+Implemented by maintaining a cursor to the *"current"* element.
+
+Two notions of iterator:
+- snapshot freezes the contents of the data structure
+- dynamic follows changes to the data structure
+
+### Iterators in Python
+
+```iter(obj)``` returns an **iterator** of the object collection.
+
+To make a class *iterable*, define the method: ```__iter__(self)```.
+
+The method ```__iter__(self)``` returns an object having a ```next()``` method
+
+Calling ```next()``` returns the next object and advances the cursor or raises ```StopIteration()```.
