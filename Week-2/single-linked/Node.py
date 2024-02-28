@@ -2,6 +2,12 @@ from typing import Generic, TypeVar
 
 T = TypeVar('T')
 
+"""
+Node for a SLL
+Node represents an object in a singly linked list.
+Each node contains a value, and a link to the next node. It supports operations to set and get its element as well as operations to set and get the next element (node) it is linked to.
+"""
+
 class Node(Generic[T]):
 
     def __init__(self, value: T, next: 'Node[T]' = None):
