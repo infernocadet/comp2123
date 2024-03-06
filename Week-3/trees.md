@@ -1,4 +1,4 @@
-cSpell:ignore Preorder, Postorder
+cSpell:ignore Preorder, Postorder, Inorder
 
 # Trees
 *Content covered*:
@@ -213,3 +213,98 @@ Additional methods a binary tree can heave include:
 
 return ```null``` when there is no ```left```, ```right```, or ```sibling``` of ```p```.
 
+#### Node object
+```Node object``` implementation typically has the following attributes:
+- ```value```: value associated with the Node
+- ```left```: left child of the Node
+- ```right```: right child of the Node
+- ```parent```: *(optional)* the parent of the Node
+
+```
+def is_external(v):
+    return v.left = v.right = null
+```
+
+### Inorder Traversal
+To do an inorder traversal starting at a given node, the node is visited **after** its left subtree, but **before** its right subtree.
+
+Visit does work on the node.
+
+```
+def in_order(v)
+    if v.leftChild != null:
+        in_order(v.leftChild)
+    visit(v)
+    if v.rightChild != null:
+        in_order(v.rightChild)
+```
+
+### Print Arithmetic Expressions
+Extended inorder traversal:
+- print operand or operator when visiting node
+- print ```"("``` before left subtree
+- print ```")"``` after right subtree
+
+```
+def print_expr(v):
+    if v.left != null:
+        print("(")
+        print_expr(v.left)
+    print(v.element)
+    if v.right != null:
+        print_expr(v.right)
+        print(")")
+```
+
+### Euler Tour Traversal
+Generic traversal of a binary tree - includes, as special cases, the preorder, postorder and inorder traversals.
+
+Walk around the three, keep tree on your left, and visit each node three times:
+- on the left (preorder)
+- from below (inorder)
+- on the right (postorder)
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/euler.png" alt="comparison" width="350" height="auto">
+</p>
+
+## Linked Structure for Binary Trees
+Node is represented by an object storing:
+- Element
+- Parent
+- Left 
+- CHild
+
+Node objects implement the Position ADT.
+
+### Examples of recursive code on trees
+
+To return the depth of a ```node v```:
+```
+def depth(v):
+    # compute depth of v
+
+    if v.parent = null then
+        return 0
+    else
+        return depth(v.parent) + 1
+```
+
+To compute the height of a tree or subtree rooted at ```v```:
+```
+def height(v):
+    #compute height of subtree at v
+
+    if v.isExternal() then
+        return 0
+    else
+        h = 0
+        for child w in v.children:
+            h = max(h, height(w))
+        return h + 1
+```
+
+### Complexity analysis of recursive algorithm on tree
+Worst case, method calls itself on all children. If the work done, excluding recursion, is constant per call, total cost is **linear in number of nodes**.
+
+Sometimes, the method calls itself on at most one child. In worst case, do one call at each level of tree. If the work done, excluding recursion, is constant per call, total cost is **linear in the height of the tree**.
