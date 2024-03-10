@@ -40,7 +40,7 @@ class Node(Generic[T]):
         self._value = value
         self._parent = parent
         self._children = []
-        self.subtree_size = 1
+        self._subtree_size = 1
 
     def get_value(self) -> T:
         """
@@ -68,11 +68,11 @@ class Node(Generic[T]):
         Return subtree size of node
         :return: Integer that is the node's subtree size
         """
-        return self.subtree_size
+        return self._subtree_size
     
     def set_subtree_size(self, value: int) -> None:
         """
-        Set subtree size to specified node.
+        Set subtree size for a specified node.
         :param value: value to set the size to
         """
         self._subtree_size = value
@@ -83,6 +83,7 @@ class Node(Generic[T]):
         :param child: child node to add to list.
         """
         self._children.append(child)
+        self.set_subtree_size(self.get_subtree_size() + 1)
     
     def get_children(self) -> List['Node[T]']:
         """
