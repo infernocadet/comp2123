@@ -126,25 +126,26 @@ class Tree(Generic[T]):
         :param ls: Add nodes in preorder fashion to this supplied list
         Note: Add a newly visited node to the end of the supplied list
         """
-        if self.is_empty():
-            return ls
-        root = self._root
-        if root == p:
-            ls.append(p)
-            return ls
-        
-        for child in root.get_children():
-            preorder()
-        
+        if p is None:
+            return
+        ls.append(p)
+        for child in p.get_children():
+            self.preorder(child, ls)
 
+
+    def postorder(self, p: Node[T], ls: List[Node[T]]) -> None:
         """
-        what do i want this algorithm to do:
-        so it is gonna preorder traverse the tree until it reaches a certain node
-        start at root
-        visit each child
-        add each node visited to a visited list
-        if the current node
+        Postorder traversal of the tree
+        :param p: the node to visit
+        :param ls: Add nodes in postorder fashion to this list
+        Note: add a new visited node to the END of the supplied list
         """
+        if p is None:
+            return
+        for child in p.get_children():
+            self.postorder(child, ls)
+        
+        ls.append(p)
         
 
         
