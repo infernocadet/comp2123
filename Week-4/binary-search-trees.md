@@ -247,3 +247,31 @@ $$
 $$
 \text{We easily see that } N(1) = 1 \text{ and } N(2) = 2
 $$ 
+
+$$
+\text{Clearly, } N(h) > N(h-1) \text{ for any } h>=2
+$$
+
+$$
+\text{For } h > 2 \text{, the smallest AVL tree of height h contains the root node, one AVL subtree of height } h-1 \text{ and another of height at least } h-2 \text{:}
+$$
+
+$$
+N(h) >= 1 + N(h-1) + N(h-2) > 2N(h-2)
+$$
+
+$$
+\text{By induction, we can show that:}
+$$
+
+$$
+N(h) >= 2^{h/2}
+$$
+
+$$
+\text{By taking logarithms: } h<2log(N(h))
+$$
+
+$$
+\therefore \text{Height of AVL tree is } O(log(n))
+$$
