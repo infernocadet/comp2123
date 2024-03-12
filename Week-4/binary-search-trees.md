@@ -79,7 +79,7 @@ We distinguish between two cases
 If ```k``` is not in the tree, we can throw an exception or do nothing depending on *ADT specs*.
 
 <p align="center">
-    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/bstinsert.png" width="350" height="auto">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/bstdelete0.png" width="350" height="auto">
 </p>
 
 ### Deletion Case 1: One External Child
@@ -91,3 +91,98 @@ To remove ```w```:
 - promote the other child of ```w``` to take ```w```'s place.
 
 This way, we preserve the BST property. 
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/bstdelete1.png" width="350" height="auto">
+</p>
+
+### Deletion Case 2: Two Internal Children
+
+Suppose that the node ```w``` we want to remove has two internal children.
+
+To remove ```w```, we 
+- find the internal node ```y``` following ```w``` in an ```inorder traversal``` (i.e., ```y``` has the smallest key among the right subtree under ```w```)
+- copy the entry from ```y``` into node ```w```
+- remove node ```y``` and its left child ```z```, which must be external using the previous case.
+
+This preserves the BST property.
+
+### Deletion Algorithm
+
+```
+def remove(k)
+    w = search(k, root)
+    if w.isExternal():
+        # key was not found
+        return null
+    elif w has at least one external child:
+        remove z
+        promote w.child to take w's place
+        remove w
+    else
+        # y is leftmost internal node in the right subtree of w
+        y = immediate successor of w
+        replace contents of w with entry from y
+        remove y
+```
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/bstdelete2-1.png" width="350" height="auto">
+</p>
+
+## Complexity
+
+Consdier a binary search tree with ```n``` items and height ```h```:
+- the space used is ```O(n)```
+- get, put and remove take ```O(h)``` time
+
+The height ```h``` can be ```n``` in the worst case and approximately ```log(n)``` in the best case.
+
+We hope operations take ```O(logn)``` time but we can only guarantee ```O(n)```. However, the former can be achieved with better insertion techniques (i.e., making sure the tree is balanced.)
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/bstcomplexity.png" width="350" height="auto">
+</p>
+
+### Duplicate key values in BST
+
+Our definition says that keys are in **strictly increasing order**:
+```key(left descendant) < key(node) < key(right descendant)```
+
+This means, that with this definition, duplicate key values are not allowed. However, it is possible to change it to allow duplicates, but it means for additional complexity in BST implementation.
+- Allow left descendants to be equal to parent: ```key(left descendant) ≤ key(node) < key (right descendant)```
+- We can use a list to store duplicates.
+
+## Range Queries
+
+A **range query** is defined by two values, $k_{1}$ and $k_{2}$. We are to find all keys ```k``` stored in ```T``` such that $k_{1} <= k <= k_{2}$
+
+E.g., find all cars on eBay priced between 10k and 15k.
+
+The algorithm is a restricted version of inorder traversal.
+
+We use a recursive method, e.g. ```RangeQuery()``` which takes $k_{1}$ and $k_{2}$, and a node ```v```. If the node ```v``` is external, we return. If the node ```v``` is internal:
+
+When at node ```v```:
+- if ```key(v) < k1```: recursively search right subtree
+- if ```k1 ≤ key(v) ≤ k2```: report ```v``` and recursively search both children of ```v```.
+- if ```k2 < key(v)```: recursively search left subtree
+
+```
+def range_search(T, k1, k2)
+    output = List[]
+    range_query(T.root, k1, k2)
+
+
+def range_query(v, k1, k2)
+    if v.isExternal():
+        return null
+    if key(v) > k2:
+        range(v.left, k1, k2)
+    elif key(v) < k1 then:
+        range(v.right, k1, k2)
+    else
+        range(v.left, k1, k2)
+        output.append(v)
+        range(v.right, k1, k2)
+```
