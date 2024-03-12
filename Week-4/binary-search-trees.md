@@ -207,3 +207,39 @@ Thus:
 | The space used is ```O(n)```. |
 | Operation ```FindAllinRange()``` takes $O(h+s)$ time, where s is the number of nodes reported.  |
 | Operations ```insert()``` and ```remove()``` take ```O(h)``` time.
+
+## Maintaining a Balanced BST
+Operations on BSTs can take $O(\text{height})$ to run.
+
+Standard insertion implementation can lead to a tree with height $n-1$.
+
+We can implement algorithms that maintain a BST with height $O(height)$ by rebalancing the tree.
+
+This directly translates into $O(log_{2}n)$ for searching.
+
+### Rank-balanced Trees
+
+A family of balanced BST implementations which uses the idea of keeping a "rank" for every node, where ```r(v)``` acts as a proxy measure of the size of the subtree, rooted at ```v```.
+
+Rank-balanced trees aim to reduce the discrepancy between the ranks of the left and right subtrees.
+- AVL Trees
+- Red-Black Trees
+
+### AVL Trees
+AVL trees are rank-balanced trees, where ```r(v)``` is its height of the subtree rooted at ```v```.
+
+**Balance constaint**: The ranks of the two children of every internal node, differ by at most, 1.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/avl.png" width="350" height="auto">
+</p>
+
+### Height of an AVL tree
+
+Fact: The height of an AVL tree storing ```n``` nodes is $O(log_{2}n)$.
+
+Proof by induction:
+$$
+\text{Let } N(h) \text{ be the minimum number of keys of an AVL tree of height h.}
+\text{We easily see that } N(1) = 1 \text{ and } N(2) = 2
+$$
