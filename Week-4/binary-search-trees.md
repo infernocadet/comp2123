@@ -239,7 +239,6 @@ AVL trees are rank-balanced trees, where ```r(v)``` is its height of the subtree
 Fact: The height of an AVL tree storing ```n``` nodes is $O(log_{2}n)$.
 
 Proof by induction:
-$$
-\text{Let } N(h) \text{ be the minimum number of keys of an AVL tree of height h.}
-\text{We easily see that } N(1) = 1 \text{ and } N(2) = 2
-$$
+
+$$\text{Let } N(h) \text{ be the minimum number of keys of an AVL tree of height h.}
+\text{We easily see that } N(1) = 1 \text{ and } N(2) = 2$$
