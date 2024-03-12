@@ -285,3 +285,49 @@ Suppose we are to insert a key ```k``` into our tree:
 
 1. If ```k``` is in tree, the search for ```k``` ends at node holding ```k```. Do nothing
 2. If ```k``` is not in the tree, search for k ends at external node w. Make this a new internal node containing key ```k```.
+3. The new tree has BST property, but may not have AVL balance property at some ancestor of ```w``` since
+- some ancestors of ```w``` may have increased their height by 1
+- every node that is not an ancestor of ```w``` hasn't changed its height
+4. We use rotations to re-arrange tree to re-establish AVL property and keep BST property
+
+### Re-establishing AVL property
+- Let ```w``` be the location of the newly inserted node
+- Let ```z``` be the lowest ancestor of ```w```, whose children heights differ by 2
+- Let ```y``` be the child of ```z``` that is ancestor of ```w``` (taller child of ```z```)
+- Let ```x``` be child of ```y``` that is ancestor of ```w```
+
+We restore the balance of the nodes in a BST ```T``` by a simple "search-and-repair" strategy. Let ```z``` be the first node we encounter in going up from ```w``` to the root of T such that ```z``` is unbalanced.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/avlinsertion.png" width="350" height="auto">
+</p>
+
+In the figure above, we track from ```w```, which si the 54 node, to its ancestors. We find the lowest ancestor at which the height between its children differs by more than 1. This is the 78 node, where its left subtree has height of 4, and its right subtree has height of 2. We label this as the ```z``` node.
+
+Now, let ```y``` be the child of ```z``` with the higher height (note: ```y``` should be an ancestor of ```w```). Finally, let ```x``` be the child of ```y``` with the higher height.
+
+Since ```z``` became unbalanced because of an insertion in the subtree rooted at its child ```y```, the height of ```y``` is 2 greater than its sibling.
+
+We rebalance the subtree rooted at ```z``` by calling the ```trinode restructuring method```.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/avlinsertion1.png" width="350" height="auto">
+</p>
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/trinode.png" width="350" height="auto">
+</p>
+
+### Augmenting BST with a height attribute
+
+If we wanted to compute the height of each node from scratch it would take $O(n)$ time.
+
+Thus it is better to have this pre-computed and update the height value after each insertion and rebalancing operation
+- after creating node ```w```, set height to 1, and update height of ancestors
+- after we rotate (z,y,x), update their height and that of ancestors
+
+## Trinode Restructing
+
+Let ```x```, ```y```, and ```z``` be nodes such that ```x``` is a child of ```y``` and ```y``` is a child of ```z```.
+
+Let ```a```, ```b```, ```c``` be the inorder listing of ```x```, ```y```, and ```z```.
