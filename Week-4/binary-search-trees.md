@@ -275,3 +275,13 @@ $$
 $$
 \therefore \text{Height of AVL tree is } O(log(n))
 $$
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/avlheight.png" width="350" height="auto">
+</p>
+
+### Insertion in AVL trees
+Suppose we are to insert a key ```k``` into our tree:
+
+1. If ```k``` is in tree, the search for ```k``` ends at node holding ```k```. Do nothing
+2. If ```k``` is not in the tree, search for k ends at external node w. Make this a new internal node containing key ```k```.
