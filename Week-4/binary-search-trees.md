@@ -109,7 +109,7 @@ This preserves the BST property.
 
 ### Deletion Algorithm
 
-```
+```python
 def remove(k)
     w = search(k, root)
     if w.isExternal():
@@ -168,7 +168,7 @@ When at node ```v```:
 - if ```k1 ≤ key(v) ≤ k2```: report ```v``` and recursively search both children of ```v```.
 - if ```k2 < key(v)```: recursively search left subtree
 
-```
+``` python
 def range_search(T, k1, k2)
     output = List[]
     range_query(T.root, k1, k2)
@@ -186,3 +186,24 @@ def range_query(v, k1, k2)
         output.append(v)
         range(v.right, k1, k2)
 ```
+
+### Performance
+Let $P_{1}$ and $P_{2}$ be the binary search paths to $k_{1}$ and $k_{2}$.
+
+We say a node ```v``` is a:
+- **boundary node** if ```v``` in $P_{1}$ or $P_{2}$
+- inside node if ```key(v)``` in $[k_{1}, k_{2}]$ but not in $P_{1}$ or $P_{2}$
+- outside node if ```key(v)``` not in $[k_{1}, k_{2}]$ but not in $P_{1}$ or $P_{2}$
+
+The algorithm only visits boundary and inside nodes and
+- $|\text{inside nodes}| <= |\text{output}|$
+- $|\text{boundary node}| <= 2*\text{tree height}$
+
+Therefore, since we only spend ```O(1)``` time per node we visit, the total running time of range search is ```O(|output| + treeheight)```.
+
+Thus:
+| :memo: NOTE          |
+|:---------------------------|
+| The space used is ```O(n)```. |
+| Operation ```FindAllinRange()``` takes $O(h+s)$ time, where s is the number of nodes reported.  |
+| Operations ```insert()``` and ```remove()``` take ```O(h)``` time.
