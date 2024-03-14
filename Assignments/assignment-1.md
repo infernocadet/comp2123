@@ -1,7 +1,3 @@
-<style type="text/css">
-    ol { list-style-type: upper-alpha; }
-</style>
-
 # Assignment 1
 *COMP2123 - 510435765*
 
@@ -31,4 +27,8 @@ Consider the following snippet of pseudocode that takes an array of $n$ integers
 </p>
 
 Your task is to:
+
+a) upperbound the running time of the algorithm in terms of $n$ using $O$-notation.
+
+b) lowerbound the running time of the algorithm in terms of $n$ using $\OMEGA$ notation.
 
