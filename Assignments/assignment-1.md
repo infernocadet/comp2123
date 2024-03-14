@@ -1,3 +1,7 @@
+<style type="text/css">
+    ol { list-style-type: upper-alpha; }
+</style>
+
 # Assignment 1
 *COMP2123 - 510435765*
 
