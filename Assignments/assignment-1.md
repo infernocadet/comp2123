@@ -37,7 +37,7 @@ $$
 do equation
 $$
 
-*b) lowerbound the running time of the algorithm in terms of $n$ using $\Omega$ notation.*
+*b) lowerbound the running time of the algorithm in terms of $n$ using* $\Omega$ *notation.*
 
 
 ### Problem 2 (25 points)
