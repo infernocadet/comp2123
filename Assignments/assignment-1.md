@@ -30,5 +30,5 @@ Your task is to:
 
 a) upperbound the running time of the algorithm in terms of $n$ using $O$-notation.
 
-b) lowerbound the running time of the algorithm in terms of $n$ using $\OMEGA$ notation.
+b) lowerbound the running time of the algorithm in terms of $n$ using $\omega$ notation.
 
