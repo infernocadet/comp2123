@@ -331,3 +331,111 @@ Thus it is better to have this pre-computed and update the height value after ea
 Let ```x```, ```y```, and ```z``` be nodes such that ```x``` is a child of ```y``` and ```y``` is a child of ```z```.
 
 Let ```a```, ```b```, ```c``` be the inorder listing of ```x```, ```y```, and ```z```.
+
+Perform rotations so as to make ```b``` the topmost node of the three.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/singlerot.png" width="350" height="auto">
+</p>
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/doublerot.png" width="350" height="auto">
+</p>
+
+```
+def restructure(x):
+    """
+    input: a node x of a BST T that has both a parent y, and a grandparent z
+    output: Tree T after a trinode restructuring of x, y and z
+    """
+    1. let (a,b,c) be the left-to-right (inorder) listing of the nodes x, y and z and let (T0, T1, T2, T3) be the left-to-right (inorder) listing of the four subtrees of x, y and z that are not rooted at x, y and z/
+    2. replace the subtree with a new subtree rooted at b.
+    3. let a be the left child of b and let T0 and T1 be the left and right subtrees of a
+    4. let c be the right child of b and let T2 and T3 be the left and right subtrees of c
+    5. recalculate the heights of a, b and c from the corresponding values stored at their children
+    6. return b
+```
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/trisin.png" width="350" height="auto">
+</p>
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/tridou.png" width="350" height="auto">
+</p>
+
+### Performance
+
+Assume we are given a reference to the node ```x``` where we are performing a trinode restructure, and that the binary search tree is represented using nodes and pointers to parent, left and right children:
+
+A single or double rotation takes $O(1)$ time, because we updating $O(1)$ pointers.
+
+## Removal in AVL trees
+
+Suppose we are to remove a key ```k``` from our tree.
+
+1. If ```k``` is not in the tree, search for k ends at external node. We do nothing.
+2. If ```k``` is in the tree, search for ```k``` performs usual BST removal, leading to removing a node with an external child and promoting its other child, which we call ```w```.
+3. The new tree has BST property but may not have AVL balance property at some ancestor of ```w```.
+4. We use rotations to then rearrange tree and re-establish AVL property, and keeping BST property
+
+### Re-establishing AVL property
+- Let ```w``` be the parent of deleted node
+- Let ```z``` be lowest ancestor of ```w```, whos children heights differ by 2
+- Let ```y``` be the child of ```z``` with larger height (```y``` is not an ancestor of ```w```)
+- Let ```x``` be child of ```y``` with larger height
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/tridou.png" width="350" height="auto">
+</p>
+
+- If tree does not have AVL property, do a trinode restructure at ```x, y, z```
+- This restores the AVL property at z, but it may upset the balance of another node higher in the tree, so we keep checking for balance until root of T is reached
+
+### AVL Tree Performance
+Suppose we have an AVL tree storing n items, then
+- Data structure uses $O(n)$ space
+- Height of tree is $O(log_{2}n)$
+- Searching takes $O(log_{2}n)$
+- Insertion takes $O(log_{2}n)$
+- Removal takes $O(log_{2}n)$
+
+## Map ADT
+- ```get(k)```: if the map ```M``` has an entry with key ```k```, return its associated value
+- ```put(k,v)```: if key ```k``` is not in ```M```, then insert ```(k,v)``` into the map ```M```; else, replace existing value associated to ```k``` with ```v```.
+- ```remove(k)```: if the map ```M``` has an entry with key ```k```, remove it
+- ```size()```, ```isEmpty()```
+- ```entrySet()```: return an iterable collection of the entries in ```M```
+- ```keySet()```: return an iterable collection of keys in ```M```
+- ```values()```: return an iterable collection of values in ```M```
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/mapeg.png" width="350" height="auto">
+</p>
+
+### Sorted map ADT (extra methods)
+- ```firstEntry()```: returns the entry with the ```smallest``` key, if map ```isEmpty()```, return ```null```
+- ```lastEntry()```: returns entry with the ```largest``` key, if map ```isEmpty()```, return ```null```
+- ```ceilingEntry(k)```: returns the entry with ```least``` key that is greater than or equal to ```k``` (or ```null``` if there is no such entry)
+- ```floorEntry(k)```: returns the entry with the ```greatest``` key that is lesser than or equal to ```k``` (or ```null``` if there is no such entry)
+- ```lowerEntry(k)```: returns the entry with ```greatest``` key that is strictly less than ```k``` (or ```null``` if there is no such entry)
+- ```higherEntry(k)```: returns the entry with ```least``` key that is strictly greater than ```k``` (or ```null``` if there is no such entry)
+- ```subMap(k1, k2)```: returns an iteration of all the entries with key ```greater``` than or equal to ```k1``` and strictly less than ```k2```
+
+### List-based (unsorted) Map
+We can implement a map using an unsorted list of key-item pairs.
+
+To do a ```get()``` and ```put()```, we may have to traverse the whole list, these operations take $O(n)$ time.
+
+Only feasible if map is small or if we do not need to perform many gets, but rather record (i.e., system log)
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/mapeg.png" width="350" height="auto">
+</p>
+
+### Tree-based (sorted) map
+We can implement a sorted map using an AVL tree, where each node stores a key-item pair. 
+
+To do a get or a put, we search for the key in the tree, which can take $O(h)$ time, which can be $O(logn)$ if tree is balanced.
+
+Only feasible if there is total ordering on the keys.
