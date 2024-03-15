@@ -54,7 +54,7 @@ $$\sum_{i=\frac{n}{2} + 1}^{n-1} (n-i-1) = \sum_{i=\frac{n}{2} + 1}^{n-1} (n-1) 
 
 Using the arithmetic series:
 
-$$=n/4(2n-2)$$
+$$=\frac{n}{4}(2n-2) - \frac{n}{4}(\frac{n}{2} + n)$$
 
 
 
