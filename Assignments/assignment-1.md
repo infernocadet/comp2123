@@ -48,7 +48,9 @@ Considering lines 2, 3, 6, 7 and 8 all run in $O(1)$ time, we can drop them and 
 
 *b) lowerbound the running time of the algorithm in terms of $n$ using* $\Omega$ *notation.*
 
-Assume for simplicity that $n$ is even. To lowerbound the running time, we consider only the last $n/2$ integers of the array. Since this is part of the full execution, analysing this part gives us a lower bound on the total running time.
+Assume for simplicity that $n$ is even. To lowerbound the running time, we consider only the last $n/2$ integers of the array. Since this is part of the full execution, analysing this part gives us a lower bound on the total running time. This gives us:
+
+$$\sum_{i=\frac{n}{2} + 1}^{n-1} (n-i-1) = \sum_{i=\frac{n}{2} + 1}^{n-1} (n-1) - \sum_{i=\frac{n}{2} + 1}^{n-1} (i)$$
 
 
 ### Problem 2 (25 points)
