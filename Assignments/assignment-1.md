@@ -38,6 +38,10 @@ We can sum the series of how many times the inner loop runs by calculating the s
 
 $$\sum_{i=0}^{n-1} (n-i-1) = \sum_{i=0}^{n-1} (n-1) - \sum_{i=0}^{n-1} (i)$$
 
+$$= n(n-1) - \frac{(n-1)n}{2}$$
+
+$$=O(\frac{(1)2}n^{2} + \frac{(1)2}n)$$
+
 
 The bulk of this algorithm comprises of two for-loops, using two pointers $i$ and $j$ to compare each value at $A[i]$ to $A[j]$, with $i$ starting from the first integer in the array, and $j$ starting from the second integer, and iterating through to the last integer of the array, before $i$ increments by 1, and $j$ compares $A[i]$ with every value after $A[i]$.
 
