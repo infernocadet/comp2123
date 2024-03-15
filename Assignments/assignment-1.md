@@ -33,9 +33,8 @@ Your task is to:
 The bulk of this algorithm comprises of two for-loops, using two pointers $i$ and $j$ to compare each value at $A[i]$ to $A[j]$, with $i$ starting from the first integer in the array, and $j$ starting from the second integer, and iterating through to the last integer of the array, before $i$ increments by 1, and $j$ compares $A[i]$ with every value after $A[i]$.
 
 The first iteration of the inner for loop which iterates $j$ over the array executes $n-1$ times. The second executes $n-2$ times, and so on until $j$ is equal to the last index, in which it executes $1$ time. The total number of iterations is $(n-1) + (n-2) + ... (n-(n-1))$, namely,
-$$
-\sum_{k=1}^{n-1} (n-k) = n(n-1) - \frac{(n-1)n}{2}
-$$
+
+$$\sum_{k=1}^{n-1} (n-k) = n(n-1) - \frac{(n-1)n}{2}$$
 
 *b) lowerbound the running time of the algorithm in terms of $n$ using* $\Omega$ *notation.*
 
