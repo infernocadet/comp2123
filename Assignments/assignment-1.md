@@ -40,11 +40,15 @@ $$\sum_{i=0}^{n-1} (n-i-1) = \sum_{i=0}^{n-1} (n-1) - \sum_{i=0}^{n-1} (i)$$
 
 $$= n(n-1) - \frac{(n-1)n}{2}$$
 
+$$= \frac{n(n-1)}{2}$$
+
 $$=O(\frac{1}{2}n^{2} + \frac{1}{2}n)$$
 
 Considering lines 2, 3, 6, 7 and 8 all run in $O(1)$ time, we can drop them and take the most significant order of $n$, hence this algorithm runs in $O(n^2)$ in the worst-case scenario.
 
 *b) lowerbound the running time of the algorithm in terms of $n$ using* $\Omega$ *notation.*
+
+Assume for simplicity that $n$ is even. To lowerbound the running time, we consider only the last $n/2$ integers of the array. Since this is part of the full execution, analysing this part gives us a lower bound on the total running time.
 
 
 ### Problem 2 (25 points)
