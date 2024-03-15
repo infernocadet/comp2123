@@ -30,6 +30,15 @@ Your task is to:
 
 *a) upperbound the running time of the algorithm in terms of* $n$ *using* $O$*-notation.*
 
+The bulk of this algorithm comprises of a nested for loop. The outer loop uses a pointer $i$ which runs from $0$ to $n-1$ where $n$ is the length of the array. The inner loop uses a pointer $j$ which runs from $i+1$ to $n-1$. Hence the inner loop runs $n-i-1$ times for each iteration of the outer loop.
+
+The worst-case scenario is when we have to process through the full size of the array, i.e. $n$ times.
+
+We can sum the series of how many times the inner loop runs by calculating the series of how many times ```line 5``` runs for each value of $i$ in ```line 4```. This gives us:
+
+$$\sum_{i=0}^{n-1} (n-i-1) = \sum_{i=0}^{n-1} (n-1) - \sum_{i=0}^{n-1} (i)$$
+
+
 The bulk of this algorithm comprises of two for-loops, using two pointers $i$ and $j$ to compare each value at $A[i]$ to $A[j]$, with $i$ starting from the first integer in the array, and $j$ starting from the second integer, and iterating through to the last integer of the array, before $i$ increments by 1, and $j$ compares $A[i]$ with every value after $A[i]$.
 
 The first iteration of the inner for loop which iterates $j$ over the array executes $n-1$ times. The second executes $n-2$ times, and so on until $j$ is equal to the last index, in which it executes $1$ time. The total number of iterations is $(n-1) + (n-2) + ... (n-(n-1))$, namely,
