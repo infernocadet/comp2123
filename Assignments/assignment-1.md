@@ -42,6 +42,20 @@ $$\frac{n(n-1)}{2}$$
 
 $$\frac{1}{2}n^2 - \frac{1}{2}n$$
 
+Hence ```for loop``` in line 5 is $O(n^{2})$.
+
+As the ```for loop``` in line 4 simply iterates $i$ through the length $n$ of the array, this runs in $O(n)$ time.
+
+The following lines run in $O(1)$ time:
+- line 2: assigning n to be the length of the array
+- line 3: initialising ```num_matches``` variable
+- line 6 + 7: comparing $A[i]$ and $A[j]$ and then incrementing ```num_matches``` if true
+
+Therefore, the upperbound of this algorithm is
+
+$$O(1) + O(1) + O(n) * O(n^{2}) + O(1)$$
+$$ = O(n^{3})$$
+
 *b) lowerbound the running time of the algorithm in terms of $n$ using* $\Omega$ *notation.*
 
 
