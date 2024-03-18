@@ -56,7 +56,13 @@ Using the arithmetic series:
 
 $$=\frac{n}{4}(2n-2) - \frac{n}{4}(\frac{n}{2} + n)$$
 
+$$=\frac{n^2-2n}{2} - \frac{n^2+2n}{8}$$
 
+$$=\frac{3n^2-10n}{8}$$
+
+Although the number of iterations are reduced in this modified algorithm, the growth rate of the number of operations with respect to $n$ is still quadratic.
+
+This gives us a lowerbound of $\Omega(n^2)$.
 
 ### Problem 2 (25 points)
 
@@ -68,8 +74,13 @@ Consider a stack where each element stores an integer value. We want to extend t
 
 ```Average()``` returns the average of all the elements on the stack
 
-*For each operation, describe their implementation in English, argue the correctness and the running time. *
+*For each operation, describe their implementation in English, argue the correctness and the running time.*
 
+We can add two attributes to our Stack ADT Class, ```self_size``` and ```self_sum```.
+
+In our insertion methods, every time we ```insert()``` or ```append()``` an element $E$, we increment ```self_size``` by $1$ and add the value of $E$ to ```self_sum```.
+
+In our deletion methods, every time we ```delete()``` or ```pop()``` an element, say $Q$, we decrement ```self_size``` by $1$ and decrease ```self_sum``` by the value of $Q$.
 
 ### Problem 3 (25 points)
 
