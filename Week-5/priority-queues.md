@@ -137,3 +137,72 @@ The selection-sort algorithm, which is an ***in-place*** algorithm, is where the
 </p>
 
 ### Insertion Sort
+
+An alternative implementation of priority queue $P$ uses a list $S$ where we store items ordered by key values. The first element in $S$ is always the an element with smallest key in $P$. We can implement ```remove_min()``` by removing the first element in $S$. Assuming that $S$ is implemented with a linked list or an array which supports constant-time front-element removal, finding and removing the minimum in $P$ takes $O(1)$ time. However, the ```insert()``` method of $P$ requires we scan through the list $S$ to find the appropriate place to insert the new element and key. This takes $O(n)$ time, where $n$ is the number of elements in $P$ at the time the method i executed. 
+
+If we implement priority queue $P$ using a sorted list, then we improve the running time of the second-phase of ```PQ-Sort``` to $O(n)$, as each operation for ```remove_min()```takes $O(1)$ time. However now the first phase becomes the bottleneck. The running time of each ```insert()``` operations is proportional to the number of elements currently in the priority queue. This sorting algorithm is known as ***insertion-sort***, and the bottleneck is the repeated insertion of a new element at the appropriate position in the list. 
+
+Whilst both ***insertion-sort*** and ***selection-sort*** have upperbounds of $O(n^2)$ time, selection-sort always takes $\Omega(n^2)$ time, whilst, if the list is in reversed order, insertion-sort takes $O(n)$ time.
+
+```python
+def insertion_sort(A):
+    #input: array A, of n elements
+    #output: ordering of A so that elements are nondecreasing
+    for i in (2, n):
+        x = A[i]
+        # put x in right place in A[1, i], moving larger elements up if needed
+        j = i
+        while j > 1 and x < A[j-1]:
+            A[j] = A[j-1] # move A[j-1] up one cell
+            j -= 1
+        A[j] = x
+    return A
+```
+
+The insertion-sort algorithm is an ***in-place*** algorithm, and there is only a constant amount of extra memory used. In each iteration, $A[1...i-1]$ is the sorted priority queue and $A[i...n]$ is the unsorted input list.
+
+## Heap Data Structure (min-heap)
+
+An implementation of a priority queue which is efficient for both the ```insert(k,e)``` and ```remove_min()``` operations is to use a **heap**. We can perform insertions and removals in logarithmic time. We abandon the idea of storing elements and keys in a list and store elements and keys in a binary tree instead.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/heap.png" width="350" height="auto">
+</p>
+
+
+A **heap** is a binary tree $T$ which stores a collection of keys at its internal nodes, and satisfies two additional properties: a relational property defined in terms of the way keys are stored in T and a structural property defined in terms of $T$ itself. The relational property for T is the following:
+
+#### Heap-Order Property
+| :bulb:  In a heap $T$, for every node $v$ other than the root, the key stored at $v$ is greater than or equal to the key stored at $v$'s parent.  |
+|-----------------------------------------|
+
+As a consequence of this property, keys encountered on a path from the root to a leaf node are in non-decreasing order. A minimum key is always stored at the root of $T$. We also want $T$ to have the minimum height possible, by enforcing another structural property:
+
+#### Complete Binary Tree
+| :bulb:  A binary tree $T$ with height $h$ is *complete* if the levels $0, 1, 2..., h$ have the maximum number of nodes possible, that is, level $i$ has $2^i$ nodes, for $0 ≤ i ≤ h-1$, and for the level $h-1$, all the internal nodes are to the left of external nodes.|
+|-----------------------------------------|
+
+By saying that all the internal nodes on level $h-1$ are to the left, we mean that all the internal nodes on this level will be visited before any external nodes in an inorder traversal. The ***last node*** of $T$ is the right-most, deepest internal node of $T$.
+
+### Minimum of a Heap
+The root always holds the smallest key in the heap.
+
+**Proof**: Suppose the minimum key is at some internal node $x$. Because of the heap property, as we move up, the keys can only get smaller. If $x$ is not the root, then the parent holds a smallest key. 
+
+### Height of a Heap
+A heap storing $n$ keys has height of $log(n)$.
+
+**Proof**: Let $h$ be the height of a heap storing $n$ keys. Since there are $2^i$ keys at depth $i = 0, ..., h-1$ and at least one key at depth $h$, we have $n >= 1 + 2 + 4 + ... + 2^{h-1} + 1$, thus $n >= 2^h$, and hence $log(n) >= h$.
+
+## Insertion into a Heap
+In order to store a new key-element pair $(k,e)$ in $T$, we need to add a new internal node to $T$. To keep $T$ as a complete binary tree, we must add this new node so that it becomes the new last node of $T$. We must identify the correct external node $z$ and insert the new element at $z$. 
+
+This is usually the external node immediately right of the last node $w$.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/heapins.png" width="350" height="auto">
+</p>
+
+### Up-Heap Bubbling
+
+After inserting, we need to restore the heap-order property.
