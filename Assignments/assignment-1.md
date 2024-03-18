@@ -84,7 +84,7 @@ In our deletion methods, every time we ```delete()``` or ```pop()``` an element,
 
 ### Problem 3 (25 points)
 
-As input we are given a *sorted* array $B$ containing $n$ positive integers, together with an integer $m$. The aim is to compute how many indices $i$ and $j$ (with $i < j$) there are such that the sum of the $i$th and the $j$th element of $B$ is at least $m$, i.e., $A[i] + A[j] >= m$. For full marks, your algorithm needs to run in $O(n)$ time.
+As input we are given a *sorted* array $B$ containing $n$ positive integers, together with an integer $m$. The aim is to compute how many indices $i$ and $j$ (with $i < j$) there are such that the sum of the $i\text{th}$ and the $j\text{th}$ element of $B$ is at least $m$, i.e., $A[i] + A[j] >= m$. For full marks, your algorithm needs to run in $O(n)$ time.
 
 Example:
 $B = [1, 4, 4, 6], m = 7 → \text{ return } 4$
