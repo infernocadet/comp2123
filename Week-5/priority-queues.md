@@ -290,4 +290,26 @@ Heap-sort can be arranged to work in place using part of the array for the outpu
 
 A heap for $n$ keys can be constructed in $O(n)$ time, but the $n$ ```remove_min()``` still take $O(nlog(n))$ time.
 
-It may be useful 
+It may be useful to support a few more operations:
+- ```remove(e)```: remove item ```e``` from the priority k
+- replace_key(e, k): update key of item ```e``` with ```k```
+- replace_value(e, v): update value of item ```e```with ```v```
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/timesum.png" width="350" height="auto">
+</p>
+
+## Implementing a priority queue
+Entries: a key and value pair
+Comparators: a function or interface to compare entry objects
+
+```python
+def compare(a,b):
+    # returns an integer i such that
+    if a < b:
+        i < 0
+    elif a = b:
+        i = 0
+    else: # i > 0
+        i > 0
+```
