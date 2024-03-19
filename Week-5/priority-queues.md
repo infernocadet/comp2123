@@ -206,3 +206,88 @@ This is usually the external node immediately right of the last node $w$.
 ### Up-Heap Bubbling
 
 After inserting, we need to restore the heap-order property.
+Unless the node we inserted is the root (that is, the priority queue was empty) we compare ```z.key``` with ```u.key```, the key of the parent $u$ of $z$. if $u$ is larger than $z$,  we swap those element pairs. This swap causes the new key-element pair to move up a level. We continue swapping until there is no violation.
+
+In the worst case, an inserted node needs to bubble up all the way to the root of the heap - thus the running time of method ```insert()``` is proportional to the height of $T$, that is, $O(log(n))$.
+
+#### Finding position for insertion
+We start from the last node, go up until a left child or root is reached. If we reach the root then we need to open a new level. Otherwise, go to the sibling (right child of parent) and go down left until a leaf is reached.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/heapeg.png" width="350" height="auto">
+</p>
+
+### Removal from a Heap
+We know that an element with the smallest key is stored at the root $r$ of the heap $T$. Unless $r$ is the only internal node of $T$, we cannot simply delete this node, because this would disrupt the tree.
+
+Instead, access the last node $w$ of $T$, copy its key-element pair to the root $r$, and delete $w$. Then we need to restore the heap-order property, using down-heap bubblibg.
+
+#### Down-Heap Bubbling after a Removal
+Our tree is still complete, but may violate the heap-order property. We examine the root $r$ of $T$. If both children of $r$ are external nodes we are chilling. we swap keys along downward path from the root.
+
+```python
+def down_heap(z):
+    while z has child:
+        if key(child) < key(z):
+            x = child of z with smallest key
+            swap keys of x and z
+            z = x
+```
+
+Correctness: after swap of ```z```, heap-order property is restored up to level of ```z```.
+
+Complexity: $O(log(n))$ time because height of heap is $log(n)$.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/remminheap.png" width="350" height="auto">
+</p>
+
+#### Finding next last node after deletion
+Start from the old last node, go up until a right child or root is reached. If we reach the root, then close a level. Otherwise, go to the sibling (left child of parent). Then go down right until a leaf is reached. 
+
+### Heap-based implementation of a priority queue
+
+Heap-based priority queue consists of the following:
+- ***heap***: a complete binary tree $T$ whose elements are stored at internal nodes and have keys satisfying the heap-order property. For each internal node $v$ of $T$, we denote the key of the element stored at $v$ was $k(v)$
+- ***last***: a reference to the last node of $T$.
+- ***comp***: a comparison rule that defines the total order relation among the keys. ***comp*** maintains the minimum element at the root.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/heapimp.png" width="350" height="auto">
+</p>
+
+|Operation  |Time   |
+|-----------|-------|
+|size, isEmpty|$O(1)$|
+|min        |$O(1)$|
+|insert     |$O(log(n))$|
+|remove     |$O(log(n))$|
+
+## Heap Sort
+Consider again the ```PQ-Sort``` scheme, which uses a priority queue $P$ to sort a list $S$. If we implement the priority queue $P$ with a heap, then in the first phase, each of the $n$ insert operations takes time $O(log(k))$, where $k$ is the number of elements in the heap at the time. During the second phase, each of the $n$ ```remove_min()``` operations runs in $O(log(k))$ time as well, where $k$ is the number of elements in the heap at the time.
+
+Hence, each phase takes $O(nlog(n))$ time, so the entire priority queue sorting algorithm runs in $O(nlog(n))$ time when we use a heap to implement the priority queue. This is known as **heap sort**.
+
+## Array-Based Implementation of a heap
+
+We can represent a heap with $n$ keys by means of an array with length $n$.
+
+Special nodes:
+- root is at $0$
+- last node is at $n-1$
+
+For the node at index $i$:
+- left child is at index $2i+1$
+- right hcild is at index $2i+2$
+- parent is at index $\lfloor(i-1)/2\rfloor$
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/arrheap.png" width="350" height="auto">
+</p>
+
+### Refinements and Generalisation
+Heap-sort can be arranged to work in place using part of the array for the output and part for the priority queue.
+
+A heap for $n$ keys can be constructed in $O(n)$ time, but the $n$ ```remove_min()``` still take $O(nlog(n))$ time.
+
+It may be useful 
