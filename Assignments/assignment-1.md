@@ -147,18 +147,16 @@ $B = [1, 4, 4, 6], m = 7 → \text{ return } 4$
 
 ```python
 def number_of_indices(B, m):
-    n = len(B) # assign n to the size of array B
-    count = 0 # assign a counter to increment for each valid pair of indices
-
-    i = 0 # initialise two pointers, i and j
+    n = len(B) 
+    count = 0 
+    i = 0 
     j = n - 1
-
     while i < j:
-        if B[i] + B[j] >= m: # check if indices sum to m or greater
-            count += (j - i) # add these indices including indices between i and j
-            j -= 1 # decrement j pointer down
+        if B[i] + B[j] >= m: 
+            count += (j - i) 
+            j -= 1 
         else:
-            i += 1 # if sum was less than m, increment i pointer up
+            i += 1 
     return count
 ```
 
@@ -226,6 +224,10 @@ The loop termiantes when $i >= j$, which means that are no more unique pairs to 
 
 
 *c) Analyse the running time of your algorithm.*
+
+The algorithm begins by creating and storing variables for the size of the array, set to ```n```, a counter for valid pairs ```count```, and an ```i``` and ```j``` pointer. These are run in constant time $O(1)$. Regardless of the number of integers in the array, the number of initialisation variables remain the same.
+
+The bulk of this algorithm comprises of the ```while``` loop which runs while ```i < j```. Inside the ```while``` loop, the line
 
 ## TODO - Clean up problem 2 correctness using invariant "#461, #462"
 
