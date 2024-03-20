@@ -227,7 +227,15 @@ The loop termiantes when $i >= j$, which means that are no more unique pairs to 
 
 The algorithm begins by creating and storing variables for the size of the array, set to ```n```, a counter for valid pairs ```count```, and an ```i``` and ```j``` pointer. These are run in constant time $O(1)$. Regardless of the number of integers in the array, the number of initialisation variables remain the same.
 
-The bulk of this algorithm comprises of the ```while``` loop which runs while ```i < j```. Inside the ```while``` loop, the line
+The bulk of this algorithm comprises of the ```while``` loop which runs while ```i < j```. Inside the ```while``` loop, ```line 7``` ```if B[i] + B[j] >= m:``` performs a constant-time check to see if $B[i] + B[j]$ is greater than $m$. Comparisons are run in constant time. If it is larger, then the ```count``` variable is updated in constant time, where arithmetic operations are run in constant time. Decrementing ```j``` by 1 in ```line 9``` is also run in constant time $O(1)$. Else, if the sum is less than $m$, then ```i``` is incrementing which takes place in constant $O(1)$ time. 
+
+The focus is the while loop. By nature, $i$ or $j$ can move across the array at most $n$ times in total, where $n$ is the length of the array. 
+- $i$ can increment from $(0, n-1)$, which is at most $n-1$ increments.
+- $j$ can decrement from $(n-1, 0)$ which is at most $n-1$ decrements.
+
+Whilst each pointer can move $n-1$ times at most, the while loop terminates when $i<j$. Given that $i$ and $j$ are at the start and end of the array and move toward each other, through increments or decrements, the loop will run until they meet, which can happen **at most**, after $n$ iterations. Given a number of integers $n$ in the array, there is no significantly distinguishable best and worst case. If there are absolutely no pairs, $i$ would have to increment $n-1$ times, until it reaches $j$, in which case the loop terminates in $O(n)$ time. If the sum of the elements at the initial indices $i, j$ are already greater than or equal to $m$, then the algorithm will still decrement $j$ in each iteration $n-1$ times until it meets with $i$, in whihc case the loop terminates in $O(n)$ time.
+
+Even if we consider iterating through the last half of the list, where $i = \frac{n}{2}$, each pointer can increment/decrement at most $n-1 - \frac{n}{2}$, which runs in $\Omega(n)$ time.
 
 ## TODO - Clean up problem 2 correctness using invariant "#461, #462"
 
