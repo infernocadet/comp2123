@@ -44,7 +44,7 @@ $$= \frac{n(n-1)}{2}$$
 
 $$=O(\frac{1}{2}n^{2} + \frac{1}{2}n)$$
 
-Considering lines 2, 3, 6, 7 and 8 all run in $O(1)$ time, we can drop them and take the most significant order of $n$, hence this algorithm runs in $O(n^2)$ in the worst-case scenario.
+Considering lines 2, 3, 6, 7 and 8 all run in $O(1)$ time *(as comparisons and assignments are in constant time)*, we can drop them and take the most significant order of $n$, hence this algorithm runs in $O(n^2)$ in the worst-case scenario.
 
 *b) lowerbound the running time of the algorithm in terms of* $n$ *using* $\Omega$ *notation.*
 
@@ -76,11 +76,65 @@ Consider a stack where each element stores an integer value. We want to extend t
 
 *For each operation, describe their implementation in English, argue the correctness and the running time.*
 
+#### Standard ```push()``` and ```pop()``` operations
+
 We can add two attributes to our Stack ADT Class, ```self_size``` and ```self_sum```.
 
-In our insertion methods, every time we ```insert()``` or ```append()``` an element $E$, we increment ```self_size``` by $1$ and add the value of $E$ to ```self_sum```.
+In our insertion methods, every time we ```insert()``` or ```append()``` an element $E$, we increment ```self_size``` by $1$ and add the value of $E$ to ```self_sum```. 
+
+```python
+def newpush(self, e) -> None:
+    self.push(e)
+    self._size += 1
+    self._sum += e
+```
 
 In our deletion methods, every time we ```delete()``` or ```pop()``` an element, say $Q$, we decrement ```self_size``` by $1$ and decrease ```self_sum``` by the value of $Q$.
+
+```python
+def newpop(self) -> int:
+    if self.is_Empty(): #checks if stack is empty
+        return None
+    e = self.pop()
+    self._size -= 1
+    self._sum -= e
+    return e
+```
+
+These functions both maintain a running time of $O(1)$. The ```newpush()``` function is modified to increment ```self._size``` by 1 ($O(1)$ time) and and increment ```self_sum``` by ```e``` ($O(1)$ time), so our ```push()``` still takes $O(1)$ time. The ```newpop()``` function checks if the stack is empty ($O(1)$ time), else it will pop the topmost value and assign it to ```e``` ($O(1)$ time), and decrement the ```self._size``` by 1 ($O(1)$ time) and decrement ```self_sum``` by ```e``` ($O(1)$ time), so our ```pop()``` still takes $O(1)$ time.
+
+These new functions however do take up minimally more **constant space** $O(1)$ as only two additional integer variables are added regardless of the size of the stack.
+
+#### Auxilliary Functions: ```count()```, ```sum()``` & ```average()```
+
+Our ```count()``` function will return the size of the stack. 
+
+**Time complexity**: This operation runs in $O(1)$ time as it only returns a pre-computed value.
+**Correctness**: This operation returns the value of ```_size``` which is incremented or decremented every time an integer is pushed or popped in and out of the stack, respectfully. The invariant ```_size```: count of integers is always accurate.
+```python
+def count():
+    return self._size
+```
+
+Our ```sum()``` function will return the sum of the stack, which is changed every time an ```Integer``` is inserted or removed from the stack, by the value of the ```Integer```. 
+
+**Time complexity**: This operation runs in $O(1)$ time as it only returns a pre-computed value.
+**Correctness**: This operation returns the value of ```_sum``` which is increased or decreased by the value of the Integer being pushed or popped in and out of the stack, respectfully. The invariant ```_sum``` will always track the summed values of all Integers in the stack, hence the sum of integers is always accurate.
+```python
+def sum():
+    return self._sum
+```
+
+Our ```average()``` function will simply return the sum of the stack, divided by number of ```Integers``` in the stack. 
+
+**Time complexity**: This operation runs in $O(1)$ time as it only returns the quotient of two stored values.
+**Correctness**: This operations calculates the average based on ```_sum``` and ```_size``` which are both kept up to date with each push or pop operation. This calculation is based on the mathematical definition of the average, and the sum and size are always maintained accurately. It also checks to see if the list is empty to avoid runtime errors. Hence the calculated average sum is always accurate.
+```python
+def average():
+    if self._size == 0:
+        return 0
+    return self._sum / self._size
+```
 
 ### Problem 3 (25 points)
 
@@ -91,7 +145,67 @@ $B = [1, 4, 4, 6], m = 7 → \text{ return } 4$
 
 *a) Design an algorithm that solves the problem.*
 
+```python
+def number_of_indices(B, m):
+    n = len(B) # assign n to the size of array B
+    count = 0 # assign a counter to increment for each valid pair of indices
+
+    i = 0 # initialise two pointers, i and j
+    j = n - 1
+
+    while i < j:
+        if B[i] + B[j] >= m: # check if indices sum to m or greater
+            count += (j - i) # add these indices including indices between i and j
+            j -= 1 # decrement j pointer down
+        else:
+            i += 1 # if sum was less than m, increment i pointer up
+    return count
+```
+
+The algorithm number ```number_of_indices(array B, integer m)``` takes advantage of the properties of the sorted list stored in $B$. Two pointers, $i$ and $j$ sum up two values, starting from the start (index $0$) and end (index $n-1$) of the list. We iterate through the array:
+- if $B[i]$ + $B[j] >= m$: then these two values add up to at least $m$. We increment our counter by the number of indices between $i$ and $j$ (inclusive) as the list is sorted, by adding $j-i$ indices. Then we move the $j$ pointer down.
+- if $B[i]$ + $B[j] \text{ NOT} >= m \text{, i.e., }B[i]$ + $B[j] < m$: then these two values do not add up to at least $m$. We leave the counter alone and increment the $i$ pointer up to continue our analysis with a larger value.
+- the loop ends when $i = j$.
+
+Example:
+
+```python
+B = [1, 2, 4, 5]
+m = 7
+
+n = 4
+count = 0
+i, j = 1, n - 1 # j = 3
+
+# first iteration
+B[0] + B[3] = 1 + 5 = 6
+# B[i] + B[j] < m in this case, increment i by 1
+i += 1 # i = 1
+B[1] + B[3] = 2 + 5 = 7
+# B[i] + B[j] >= m: add all indices between 1 and 3 inclusive to our counter (2, 5) & (4,5)
+count += 3 - 1 = 2
+j -= 1 # decrement j pointer
+B[1] + B[2] = 2 + 4 = 6
+# B[i] + B[j] < m in this case, increment i by 1
+i += 1 # i = 2
+# our while loop condition is now not True, we break out of the loop and return count.
+```
+
 *b) Argue the correctness of your algorithm.*
+
+We can use loop invariants to argue the correctness of the two-pointer algorithm. A loop invariant is a condition which holds true before and after each iteration of the loop.
+
+We want to check that, before and after each iteration of the loop:
+1. All pairs $(i', j')$, where $0 <= i' < i$ and $i' < j' <= j$ have been considered, and that if those pairs summed to a value greater than or equal to $m$, that they have been counted.
+2. All pairs $(i, j')$, where $i < j' < j$ would also have a sum greater than or equal to $m$, since the list is sorted.
+3. For any $i' > i$, $B[i'] + B[j]$ has not yet been considered.
+4. The count accurately reflects the number of valid pairs.
+
+Initialisation: $i = 0$ and $j = len(B) - 1$. No pairs have yet been counted. This is consistent with our loop invariants.
+Iteration: Each iteration counts all $j$ indices for the current $i$ (when $B[i] + B[j] >= m$), and decrements $j$. If the sum is less than $m$, it increments $i$. THe loop invariants are maintained because:
+- if the sum is greater than or equal to $m$, all valid pairs with $B[j]$ are counted and then $j$ is decremented to avoid double counting pairs.
+- if the sum is less than $m$, $i$ is incremented to find a larger $B[i]$ that could meet or exceed the sum with $B[j]$. 
 
 *c) Analyse the running time of your algorithm.*
 
+## TODO - Clean up problem 2 correctness using invariant "#461, #462"
