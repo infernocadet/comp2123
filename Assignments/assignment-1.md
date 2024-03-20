@@ -1,23 +1,6 @@
 # Assignment 1
 *COMP2123 - 510435765*
 
-## ADVICE
-- When designing a DSA:
-1. briefly describe general idea
-2. develop and elaborate
-
-- Use lecture or textbook for proof
-
-- Prove/explain/motivate answers
-
-- When giving an algorithm, algorithm does not have to be given as psuedo-code or code.
-
-- If you provide psuedo-code or code, then explain code and ideas in plain english.
-
-- Always talk from worst-case analysis
-
-- We are interested in the most efficient DSA
-
 ### Problem 1 (10 points)
 
 Consider the following snippet of pseudocode that takes an array of $n$ integers. 
@@ -78,9 +61,9 @@ Consider a stack where each element stores an integer value. We want to extend t
 
 #### Standard ```push()``` and ```pop()``` operations
 
-We can add two attributes to our Stack ADT Class, ```self_size``` and ```self_sum```.
+We can add two attributes to our Stack ADT Class, ```self_size``` and ```self_sum```, which initially both are set to $0$. Assume that our Stack ADT retains the standard ```push()``` and ```pop()``` methods as shown in the lectures, which both have a time complexity of $O(1)$ constant time.
 
-In our insertion methods, every time we ```insert()``` or ```append()``` an element $E$, we increment ```self_size``` by $1$ and add the value of $E$ to ```self_sum```. 
+In our insertion methods, every time we ```push()``` an element $e$, we increment ```self_size``` by $1$ and add the value of $e$ to ```self_sum```. 
 
 ```python
 def newpush(self, e) -> None:
@@ -88,12 +71,13 @@ def newpush(self, e) -> None:
     self._size += 1
     self._sum += e
 ```
+The ```newpush()``` function is modified to increment ```self._size``` by 1 ($O(1)$ time) and and increment ```self_sum``` by ```e``` ($O(1)$ time). As shown in lectures ```push()``` takes $O(1)$ time, hence ```newpush()``` takes $O(1)$ time.
 
-In our deletion methods, every time we ```delete()``` or ```pop()``` an element, say $Q$, we decrement ```self_size``` by $1$ and decrease ```self_sum``` by the value of $Q$.
+In our deletion methods, every time we ```pop()``` an element, we decrement ```self_size``` by $1$ and decrease ```self_sum``` by the value of the element.
 
 ```python
 def newpop(self) -> int:
-    if self.is_Empty(): #checks if stack is empty
+    if self.is_empty(): #checks if stack is empty
         return None
     e = self.pop()
     self._size -= 1
@@ -101,15 +85,20 @@ def newpop(self) -> int:
     return e
 ```
 
-These functions both maintain a running time of $O(1)$. The ```newpush()``` function is modified to increment ```self._size``` by 1 ($O(1)$ time) and and increment ```self_sum``` by ```e``` ($O(1)$ time), so our ```push()``` still takes $O(1)$ time. The ```newpop()``` function checks if the stack is empty ($O(1)$ time), else it will pop the topmost value and assign it to ```e``` ($O(1)$ time), and decrement the ```self._size``` by 1 ($O(1)$ time) and decrement ```self_sum``` by ```e``` ($O(1)$ time), so our ```pop()``` still takes $O(1)$ time.
+The ```newpop()``` function checks if the stack is empty ($O(1)$ time, and it returns None), else it will pop the topmost value and assign it to ```e``` ($O(1)$ time), and decrement the ```self._size``` by 1 ($O(1)$ time) and decrement ```self_sum``` by ```e``` ($O(1)$ time). As shown in lectures ```pop()``` takes $O(1)$ time, hence ```newpop()``` tajes $O(1)$ time. 
+
+These functions both maintain a running time of $O(1)$.
 
 These new functions however do take up minimally more **constant space** $O(1)$ as only two additional integer variables are added regardless of the size of the stack.
+
+To prove correctness, we initiate loop invariants we want to make sure that size and sum accurately track the number of elements and sum of elements. When there is nothing in the stack, ```self_size``` and ```self_sum``` are equal to 0, which maintains the invariant. When an integer is pushed into the stack using ```newpush()```, the size of the stack is incremented by 1, and the sum of the stack is increased by the value of the element. When an integer is popped out of the stack using ```newpop()```, the size of the stack is decremented by 1, and the sum of the stack is decreased by the value of the elemnt. Hence the size and sum variables correctly track the number of elements currently in the stack and the total sum of these elements.
 
 #### Auxilliary Functions: ```count()```, ```sum()``` & ```average()```
 
 Our ```count()``` function will return the size of the stack. 
 
 **Time complexity**: This operation runs in $O(1)$ time as it only returns a pre-computed value.
+
 **Correctness**: This operation returns the value of ```_size``` which is incremented or decremented every time an integer is pushed or popped in and out of the stack, respectfully. The invariant ```_size```: count of integers is always accurate.
 ```python
 def count():
@@ -119,15 +108,17 @@ def count():
 Our ```sum()``` function will return the sum of the stack, which is changed every time an ```Integer``` is inserted or removed from the stack, by the value of the ```Integer```. 
 
 **Time complexity**: This operation runs in $O(1)$ time as it only returns a pre-computed value.
+
 **Correctness**: This operation returns the value of ```_sum``` which is increased or decreased by the value of the Integer being pushed or popped in and out of the stack, respectfully. The invariant ```_sum``` will always track the summed values of all Integers in the stack, hence the sum of integers is always accurate.
 ```python
 def sum():
     return self._sum
 ```
 
-Our ```average()``` function will simply return the sum of the stack, divided by number of ```Integers``` in the stack. 
+Our ```average()``` function calculates and returns the average of all elements in the stack. 
 
-**Time complexity**: This operation runs in $O(1)$ time as it only returns the quotient of two stored values.
+**Time complexity**: This operation runs in $O(1)$ time as it only returns the quotient of two stored values. ```sum``` and ```size``` are maintained as aggregate values and do not require iteration over stack elements, which allows ```average()``` to run in constant time.
+
 **Correctness**: This operations calculates the average based on ```_sum``` and ```_size``` which are both kept up to date with each push or pop operation. This calculation is based on the mathematical definition of the average, and the sum and size are always maintained accurately. It also checks to see if the list is empty to avoid runtime errors. Hence the calculated average sum is always accurate.
 ```python
 def average():
@@ -220,7 +211,9 @@ If $B[i] + B[j] < m$:
 
 Termination:
 
-The loop termiantes when $i >= j$, which means that are no more unique pairs to consider. The count reflects all valid pairs, as determined by the loop invariant that has been maintained.
+The loop termiantes when $i >= j$, which means that are no more unique pairs to consider. The algorithm has exhaustively considered all possible pairs without redundancy or omission. The count reflects all valid pairs, as determined by the loop invariant that has been maintained. 
+
+Moreover, if there are no pairs, count will remain as 0, and the algorithm will return with 0. When the array is empty, the while loop will never execute, and the algorithm will return the default value of count, which is 0, handling edge cases.
 
 
 *c) Analyse the running time of your algorithm.*
@@ -233,42 +226,7 @@ The focus is the while loop. By nature, $i$ or $j$ can move across the array at 
 - $i$ can increment from $(0, n-1)$, which is at most $n-1$ increments.
 - $j$ can decrement from $(n-1, 0)$ which is at most $n-1$ decrements.
 
-Whilst each pointer can move $n-1$ times at most, the while loop terminates when $i < j$. Given that $i$ and $j$ are at the start and end of the array and move toward each other, through increments or decrements, the loop will run until they meet, which can happen **at most**, after $n$ iterations. Given a number of integers $n$ in the array, there is no significantly distinguishable best and worst case. If there are absolutely no pairs, $i$ would have to increment $n-1$ times, until it reaches $j$, in which case the loop terminates in $O(n)$ time. If the sum of the elements at the initial indices $i, j$ are already greater than or equal to $m$, then the algorithm will still decrement $j$ in each iteration $n-1$ times until it meets with $i$, in whihc case the loop terminates in $O(n)$ time.
+Whilst each pointer can move $n-1$ times at most, the while loop terminates when $i < j$. Given that $i$ and $j$ are at the start and end of the array and move toward each other, through increments or decrements, the loop will run until they meet, which can happen **at most**, after $n$ iterations. Given a number of integers $n$ in the array, there is no significantly distinguishable best and worst case. If there are absolutely no pairs, $i$ would have to increment $n-1$ times, until it reaches $j$, in which case the loop terminates in $O(n)$ time. If the sum of the elements at the initial indices $i, j$ are already greater than or equal to $m$, then the algorithm will still decrement $j$ in each iteration $n-1$ times until it meets with $i$, in which case the loop terminates in $O(n)$ time.
 
-Even if we consider iterating through the last half of the list, where $i = \frac{n}{2}$, each pointer can increment/decrement at most $n-1 - \frac{n}{2}$, which runs in $\Omega(n)$ time.
+Even if we consider iterating through the last half of the list, where $i = \frac{n}{2}$, each pointer can increment/decrement at most $n-1 - \frac{n}{2}$, which runs in $\Omega(n)$ time. 
 
-## TODO - Clean up problem 2 correctness using invariant "#461, #462"
-
-[1, 3, 5, 7, 8, 9]
-target = 11
-i, j = 0, 5
-b0 + b5 = 10
-incr i by 1
-i, j = 1, 5
-b1 + b5 = 3 + 9 = 12 > 11
-(1, 5), (2, 5) (3, 5), (4, 5)
-decr j by 1
-i, j = 1, 4
-b1 + b4 = 11 >= 11
-(1, 4) (2, 4) (3, 4) = 4 - 1
-decr j by 1
-i, j = 1, 3
-b1 + b3 = 10
-incr i by 1
-i, j = 2, 3
-b2 + b3 = 12
-2, 3
-j - 1
-i = j, end
-
-
-i, j = 0, 5
-b0 + b5 = 10
-incr i by 1
-i, j = 1, 5
-b1 + b5 = 12
-incr 1 by 1
-i, j = 2, 5
-b2 + b5 = 14
-count += 5-3 (5, 9), (7, 9), (8, 9)
-decr j by 
