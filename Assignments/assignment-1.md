@@ -205,7 +205,7 @@ Initialisation: $i = 0$ and $j = len(B) - 1$. There are no previously counted pa
 
 Iteration: We check to see if the current pair add up to $m$: $B[i] + B[j] >= m$. 
 
-If B[i] + B[j] >= m$:
+If $B[i] + B[j] >= m$:
 
 - the current pair $(i, j)$ is valid since their sum is at least $m$.
 - for every $i'$ where $i <= i' < j$, the pair $(i', j)$ is also valid, as $B[i']$ is greater than or equal to $B[i]$ due to the sorted list.
@@ -213,7 +213,7 @@ If B[i] + B[j] >= m$:
 - in order to avoid double counting, we decrement $j$. 
 - hence we have found the smallest value of $i$, which, when added with $j$, is more than or equal to $m$. We briefly count the all other values of $i'$ to be valid pairs with $j$. Therefore, we do not need to consider $j$ anymore, and decrement our $j$ by 1 to consider the next largest value, which we will pair our values of $i$ with.
 
-If B[i] + B[j] < m$:
+If $B[i] + B[j] < m$:
 
 - the current pair $(i, j)$ is not valid since their sum is less than $m$.
 - for every $i'$ where $i' <= i$, the pair $(i', j)$ is also **not** valid, as $B[i']$ is less than or equal to $B[i]$ due to the sorted list.
