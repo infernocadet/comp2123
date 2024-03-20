@@ -163,9 +163,9 @@ def number_of_indices(B, m):
 ```
 
 The algorithm number ```number_of_indices(array B, integer m)``` takes advantage of the properties of the sorted list stored in $B$. Two pointers, $i$ and $j$ sum up two values, starting from the start (index $0$) and end (index $n-1$) of the list. We iterate through the array:
-- if $B[i]$ + $B[j] >= m$: then these two values add up to at least $m$. We increment our counter by the number of indices between $i$ and $j$ (inclusive) as the list is sorted, by adding $j-i$ indices. Then we move the $j$ pointer down.
-- if $B[i]$ + $B[j] \text{ NOT} >= m \text{, i.e., }B[i]$ + $B[j] < m$: then these two values do not add up to at least $m$. We leave the counter alone and increment the $i$ pointer up to continue our analysis with a larger value.
-- the loop ends when $i = j$.
+- if $B[i]$ + $B[j] >= m$: then these two values add up to at least $m$. Hence this pair, $(i, j)$ satisfy our condition, and we can add this pair of indices to our counter. But, because the list is sorted, this also means that, for every $i < i' < j$, the pair $(i', j)$ is also valid, and will sum to a value greater than $m$, so we add these pairs too. Hence we increment our counter by the unique pairs of indices $(i', j)$ where $i <= i' < j$. which is $j-i$ indices. Then, to avoid double counting pairs with $j$, we decrement $j$ by $1$ to see if any smaller values of $j$ can add up with other values in the list to sum to equal or greater than $m$.
+- if $B[i]$ + $B[j] \text{ NOT} >= m \text{, i.e., }B[i]$ + $B[j] < m$: then these two values do not add up to at least $m$. We leave the pair counter alone and increment the $i$ pointer up to continue our analysis with a larger value.
+- the loop ends when $i = j$, as we have now checked every possible pair in our list.
 
 Example:
 
@@ -196,9 +196,10 @@ i += 1 # i = 2
 We can use loop invariants to argue the correctness of the two-pointer algorithm. A loop invariant is a condition which holds true before and after each iteration of the loop.
 
 We want to check that, before and after each iteration of the loop:
-1. All pairs $(i', j')$, where $0 <= i' < i$ and $i' < j' <= j$ have been considered, and that if those pairs summed to a value greater than or equal to $m$, that they have been counted.
-2. All pairs $(i, j')$, where $i < j' < j$ would also have a sum greater than or equal to $m$, since the list is sorted.
-3. For any $i' > i$, $B[i'] + B[j]$ has not yet been considered.
+1. All pairs $(i', j')$, where $0 <= i' < i$ and $j < j' <= len(B) - 1$ have been considered, and that if those pairs summed to a value greater than or equal to $m$, that they have been counted.
+2. If $B[i] + B[j] >= m$, then $B[i'] + B[j]$ for $i'$ where $i <= i' < j$ will also be greater than $m$, as $B$ is sorted in non-decreasing order, and thus $B[i'] >= B[i]$.
+3. Hence all pairs $(i', j)$, where $i < i' < j$ would also have a sum greater than or equal to $m$, and should be counted too.
+4. All pairs $(i', j)$ where $i' < i$ and where $B[i] + B[j] < m$ are ignored and not added to the count, as $B[i'] < B[i]$.
 4. The count accurately reflects the number of valid pairs.
 
 Initialisation: $i = 0$ and $j = len(B) - 1$. No pairs have yet been counted. This is consistent with our loop invariants.
@@ -209,3 +210,37 @@ Iteration: Each iteration counts all $j$ indices for the current $i$ (when $B[i]
 *c) Analyse the running time of your algorithm.*
 
 ## TODO - Clean up problem 2 correctness using invariant "#461, #462"
+
+[1, 3, 5, 7, 8, 9]
+target = 11
+i, j = 0, 5
+b0 + b5 = 10
+incr i by 1
+i, j = 1, 5
+b1 + b5 = 3 + 9 = 12 > 11
+(1, 5), (2, 5) (3, 5), (4, 5)
+decr j by 1
+i, j = 1, 4
+b1 + b4 = 11 >= 11
+(1, 4) (2, 4) (3, 4) = 4 - 1
+decr j by 1
+i, j = 1, 3
+b1 + b3 = 10
+incr i by 1
+i, j = 2, 3
+b2 + b3 = 12
+2, 3
+j - 1
+i = j, end
+
+
+i, j = 0, 5
+b0 + b5 = 10
+incr i by 1
+i, j = 1, 5
+b1 + b5 = 12
+incr 1 by 1
+i, j = 2, 5
+b2 + b5 = 14
+count += 5-3 (5, 9), (7, 9), (8, 9)
+decr j by 
