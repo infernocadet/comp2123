@@ -182,7 +182,7 @@ i += 1 # i = 2
 
 *b) Argue the correctness of your algorithm.*
 
-We can use loop invariants to argue the correctness of the two-pointer algorithm. A loop invariant is a condition which holds true before and after each iteration of the loop.
+We can use loop invariants to argue the correctness of the two-pointer algorithm. 
 
 We want to check that, before and after each iteration of the loop:
 1. All pairs $(i', j')$, where $0 <= i' < i$ and $j < j' <= len(B) - 1$ have been considered, and that if those pairs summed to a value greater than or equal to $m$, that they have been counted.
@@ -196,18 +196,18 @@ Iteration: We check to see if the current pair add up to $m$: $B[i] + B[j] >= m$
 
 If $B[i] + B[j] >= m$:
 
-- the current pair $(i, j)$ is valid since their sum is at least $m$.
-- for every $i'$ where $i <= i' < j$, the pair $(i', j)$ is also valid, as $B[i']$ is greater than or equal to $B[i]$ due to the sorted list.
-- the number of these valid pairs is $j-i$, which we add to our counter. 
-- in order to avoid double counting, we decrement $j$. 
-- hence we have found the smallest value of $i$, which, when added with $j$, is more than or equal to $m$. We briefly count the all other values of $i'$ to be valid pairs with $j$. Therefore, we do not need to consider $j$ anymore, and decrement our $j$ by 1 to consider the next largest value, which we will pair our values of $i$ with.
+- The current pair $(i, j)$ is valid since their sum is at least $m$. 
+- For every $i'$ where $i <= i' < j$, the pair $(i', j)$ is also valid, as $B[i']$ is greater than or equal to $B[i]$ due to the sorted list.
+- The total number of these valid pairs is $(j-i)$, as there are $(j-i)$ other unique pairs of $(i', j) >= m$ which we add to our counter. 
+- Hence we have found all unique values of $i'$, which, when paired with $j$, $B[i'] + B[j] >= m$. They have been considered and counted.
+- Therefore, we must now decrement $j$ by $1$, to consider the next largest value of $j$ (as the list is sorted) to avoid double counting and to consider other possible valid pairs.
 
 If $B[i] + B[j] < m$:
 
-- the current pair $(i, j)$ is not valid since their sum is less than $m$.
-- for every $i'$ where $i' <= i$, the pair $(i', j)$ is also **not** valid, as $B[i']$ is less than or equal to $B[i]$ due to the sorted list.
-- we do not add anything to the counter.
-- as the current $j$ is the largest value of $j$, we need to increment $i$ to find a larger number which when added with $j$ sums up to greater than or equal to $m$.
+- The current pair $(i, j)$ is not valid since their sum is less than $m$. We do not count this.
+- For every $i'$ where $i' <= i$, the pair $(i', j)$ is also **not** valid, as $B[i']$ is less than or equal to $B[i]$ due to the sorted list. Hence, we do not count these pairs either.
+- in this case, there is no other $j$ that would add up to $i$, where its sum would be $>= m$, as for every $j'$ where $i< j' <=j$, $B[i] + B[j']$ would be smaller than $B[i] + B[j]$. Hence, there are no possible pairs with this current $i$. Therefore, we need to increment $i$, to find other possible pairs whose sum is $>= m$.
+- At the end, we do not add to our pair counter. This maintains the accuracy of our loop invariant.
 
 Termination:
 
