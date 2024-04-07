@@ -241,6 +241,7 @@ def remove(k):
 #### Performance
 
 Assume our hash function maps $n$ keys to independent uniform values in the range $[0, N-1]$. Let $X$ be a random variable representing the number of items that map to a bucket in the array $A$, then
+
 $$
 E(X) = n/N
 $$
