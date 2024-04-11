@@ -193,3 +193,36 @@ $$m \le \frac{n(n-1)}{2}$$
 <p align="center">
     <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/gprop.png" width="auto" height="auto">
 </p>
+
+## Graph ADT
+
+We model the abstraction as a combination of three data types, ```Vertex```, ```Edge``` and ```Graph```.
+
+A ```Vertex``` stores and associated object (e.g., airport code) that is retrieved with a ```getElement()``` method.
+
+An ```Edge``` stored an associated object (such as a flight number, travel distance) that is also retrieved with ```getElement()```.
+
+### Directed Graph ADT
+
+There is a large number of different functions for the Directed Graph ADT.
+
+- ```numVertices()```
+  - returns the number of vertices in a graph
+- ```vertices()```
+  - returns an iterable of all the vertices in the graph
+- ```numEdges()```
+  - returns the number of edges of the graph
+- ```edges()```
+  - returns an iterable of all edges in the graph
+- ```getEdge(u, v)```
+  - returns the edge from vertex u to vertex v. if none exists return null. for an undirected graph, there is no difference between ```getEdge(u, v)``` and ```getEdge(v, u)```
+- ```endVertices(e)```
+  - returns an array containing the two endpoint vertices of the edge e. if the graph is directed, the first vertex is the origin and the second is the destination.
+- ```opposite(v, e)```
+  - for edge e incident to vertex v, returns the other vertex of the edge.
+- ```outDegree(v)```
+  - returns the number of outgoing edges from vertex v
+- ```inDegree(v)```
+  - returns the number of incoming edges to vertex v. for an undirected graph, this returns the same value as does ```outDegree(v)```.
+
+> :warning: for an **undirected graph**, ```outDegree()``` and ```inDegree()``` is just ```degree(v)```
