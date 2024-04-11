@@ -175,3 +175,21 @@ Every tree on $n$ vertices has $n-1$ edges.
 <p align="center">
     <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/forest.png" width="500" height="auto">
 </p>
+
+### Spaning Trees and Forests
+
+A spanning tree is a connected subgraph on the same vertex set. A spanning tree is not unique unless the graph is a tree.
+
+Spanning trees have applications to the design of communication networks. A spanning forest of a graph is a spanning subgraph that is a forest.
+
+## Graph Properties
+
+$$\sum_{v \text{ in } V}deg(v) = 2m$$
+
+$$\text{and, in a simple undirected graph:}$$
+
+$$m \le \frac{n(n-1)}{2}$$
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/gprop.png" width="auto" height="auto">
+</p>
