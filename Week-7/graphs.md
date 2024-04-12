@@ -226,3 +226,234 @@ There is a large number of different functions for the Directed Graph ADT.
   - returns the number of incoming edges to vertex v. for an undirected graph, this returns the same value as does ```outDegree(v)```.
 
 > :warning: for an **undirected graph**, ```outDegree()``` and ```inDegree()``` is just ```degree(v)```
+
+- ```outgoingEdges(v)```
+  - returns an iterable of all outgoing edges form vertex v.
+- ```incomingEdges(v)```
+  - returns an iterable of all incoming edges to vertex v. for an undirected graph, this returns the same collection as ```outgoingEdges(v)```.
+
+> :warning: for an **undirected graph**, ```outgoingEdges(v)``` and ```incomingEdges(v)``` is just ```incidentEdges(v)```
+
+- ```insertVertex(x)```
+  - creates and returns a new Vertex storing element x
+- ```insertEdge(u, v, x)```
+  - creates and returns a new edge from vertex u to vertex v, storing element x. an error occurs if there already exists an edge from u to v.
+- ```removeVertex(v)```
+  - removes vertex v and all its incident edges from the graph
+- ```removeEdge(e)```
+  - removes edge e from the graph
+
+### Edge List Structure
+
+The **vertex sequence** holds:
+
+- sequence of vertices
+- vertex object keeps track of its position in the sequence
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/vseq.png" width="auto" height="auto">
+</p>
+
+The **edge sequence** holds:
+
+- sequence edges
+- edge object keeps track of its position in the sequence
+- edge object points to the two vertices it connects
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/eseq.png" width="auto" height="auto">
+</p>
+
+### Adjacency List
+
+Additionally, each vertex keeps a sequence of edges incident on it.
+
+Edge objects keep reference to their poisiton in the incidence sequence of its endpoints.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/adjl.png" width="auto" height="auto">
+</p>
+
+### Adjacency Matrix Structure
+
+Vertex array induces an index from $0$ to $n-1$ for each index.
+
+It is a 2d-array:
+
+- reference to edge object for adjacent vertices
+- null for nonadjacent vertices
+
+### Asymptotic Performance
+
+Assuming $n$ verticies, $m$ edges, no parellel edges, and no self-loops:
+
+|  | edge list | adjacency list | adjancency matrix |
+|-|-|-|-|
+|***space*** | $O(n+m)$ | $O(n+m)$ | $O(n^2)$
+|```incidentEdges(v)``` | $O(m)$ | $O(deg(v))$ | $O(n)$
+|```getEdge(u, v)``` |$O(m)$| $O(min(deg(u), deg(v)))$ | $O(1)$
+|```insertVertex(x)```|$O(1)$|$O(1)$|$O(n^2)$
+|```insertEdge(u, v, x)```|$O(1)$|$O(1)$|$O(1)$
+|```removeVertex(v)```|$O(m)$|$O(deg(v))$|$O(n^2)$
+|```removeEdge(e)```|$O(1)$|$O(1)$|$O(1)$
+
+## Graph Traversals
+
+A fundamental algorithm operation is traversing the edges and vertices of the graph.
+
+A traversal is a systematic procuedre for exploring a graph by examining all of its vertices and edges.
+
+A web crawler, must explore a graph of hypertext documents by examining its vertices (documents) and edges (hyperlinks between documents).
+
+A traversal is efficient if it visits all vertices and edges in linear time $O(n + m)$ where $n$ is number of vertices and $m$ is number of edges.
+
+### Graph Traversal techniques
+
+A systematic and structured way of visiting all the vertices and all edges of a graph consists of two main strategies:
+
+- Depth first search
+- Breadth first search
+
+Given an adjacency list representation of the graph with $n$ vertices and $m$ edges, both traversals run in $O(n + m)$ time.
+
+#### Reminder: Trees and Forests
+
+An unrooted tree $T$ is a graph such that:
+
+- T is connected
+- T has no cycles
+
+A forest is a graph wihtout cycles - its connected components are trees. 
+
+Every tree on $n$ vertices has $n-1$ edges.
+
+## Depth-First Search (DFS)
+
+This strategy tries to follow outgoing edges leading to yet unvisited vertices whenever possible, and backtrack if "stuck".
+
+If an edge is used to discover a new vertex, we call it a **DFS edge**, otherwise it is a **back edge**.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/dfs.png" width="auto" height="auto">
+</p>
+
+### DFS pseudocode
+
+```python
+def DFS(G):
+
+  # set things up for DFS
+  for u in G.vertices():
+    visited[u] = False
+    parent[u] = None
+  
+  # visit vertices
+  for u in G.vertices():
+    if not visited[u]:
+      DFS_visit(u)
+  
+  return parent
+
+def DFS_visit(u):
+
+  visited[u] = True
+
+  # visit neighbours of u
+  for v un G.incident(u):
+    if not visited[v]:
+      parent[v] = u
+      DFS_visit(v)
+
+```
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/dfseg.png" width="auto" height="auto">
+</p>
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/dfsegcont.png" width="auto" height="auto">
+</p>
+
+### DFS main function performance
+
+Assuming adjacency list representation:
+
+```python
+# set things up for DFS
+  for u in G.vertices():
+    visited[u] = False
+    parent[u] = None
+```
+
+takes $O(n)$ time
+
+```python
+# visit vertices
+  for u in G.vertices():
+    if not visited[u]:
+      DFS_visit(u)
+  
+  return parent
+```
+
+also takes $O(n)$ time, not counting work done in ```DFS_visit```.
+
+### ```DFS_visit``` performance
+
+Assuming adjacency list representation:
+
+```python
+def DFS_visit(u):
+
+  visited[u] = True
+
+  # visit neighbours of u
+  for v un G.incident(u):
+    if not visited[v]:
+      parent[v] = u
+      DFS_visit(v)
+```
+
+Takes $O(deg(u))$ time not counting work done in recursive calls to ```DFS_visit```.
+
+Therefore the overall time is $O(\sum{u}deg(u)) = O(m)$, where $m$ is the number of edges. 
+
+### Properties of DFS
+
+Let $C_{v}$ be the connected component of $v$ in graph $G$.
+
+```DFS_visit(v)``` visits all vertices in $C_{v}$. Edges, {(u, parent[u]): u in $C_{v}$} form a spanning tree of $C_{v}$. Edges {(u, parent[u]): u in V} form a spanning forest of $G$.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/idk.png" width="auto" height="auto">
+</p>
+
+### DFS Applications
+
+DFS can be used to solve other graph problems in $O(n+m)$ time:
+
+- Find a path between two given vertices
+- Find a cycle in the graph
+- Test whether a graph is connected
+- Compute connected components of a graph
+- Compute spanning tree of a graph (if connected)
+
+DFS is the building block of more sophisticated algorithms:
+
+- testing bi-connectivity
+- finding cut edges
+- finding cut vertices
+
+### Identifying cut edges
+
+In a connected graph $G=(V, E)$, we say that an edge $(u, v)$ in $E$ is a **cut edge** if $(V, E \backslash {(u, v)})$ is not connected (i.e., without that edge, it causes the graph to be disconnected).
+
+The cut edge problem is to identify all cut edges.
+
+#### $O(m^2)$ time algorithm
+
+For each edge $(u,v)$, in $E$, remove $(u,v)$ and check using DFS if $G$ is still connected, put back $(u,v)$.
+
+#### $O(nm)$ time algorithm
+
+Only test edges in a DFS tree of $G$
