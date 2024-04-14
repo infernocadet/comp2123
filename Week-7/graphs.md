@@ -215,7 +215,9 @@ There is a large number of different functions for the Directed Graph ADT.
 - ```edges()```
   - returns an iterable of all edges in the graph
 - ```getEdge(u, v)```
-  - returns the edge from vertex u to vertex v. if none exists return null. for an undirected graph, there is no difference between ```getEdge(u, v)``` and ```getEdge(v, u)```
+  - returns the edge from vertex u to vertex v.
+    If none exists, return null.
+    For an undirected graph, there is no difference between `getEdge(u, v)` and `getEdge(v, u)`.
 - ```endVertices(e)```
   - returns an array containing the two endpoint vertices of the edge e. if the graph is directed, the first vertex is the origin and the second is the destination.
 - ```opposite(v, e)```
@@ -464,4 +466,59 @@ For every $u$ in $V$, compute $\text{level}[u]$, its level in the DFS tree.
 
 For every vertex $v$, compute the highest level that we can reach by taking DFS edges down the tree, and then one back edge up. This is ```down_and_up[v]```.
 
-A DFS edfe $(u, v)$, where
+A DFS edge $(u, v)$, where $u=\text{parent}[v]$ is not a cut edge if and only if $\text{down_and_up}[v] \ge \text{level}[v]$.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/cutedge.png" width="auto" height="auto">
+</p>
+
+## Breadth-First Search (BFS)
+
+This strategy tries to visit all vertices at distance $k$ from a start vertex $s$ before visiting vertices at distance $k+1$.
+
+- $L_{0} = {s}$
+- $L_{1}$ - vertices one edge away from $s$
+- $L_{2}$ - vertices two edges away from $s$, but no closer
+- ...
+- $L_{k}$ - vertices $k$ edges away from $s$, but no closer
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/bfseg.png" width="auto" height="auto">
+</p>
+
+### BFS pseudocode
+
+```python
+def BGS(G, s):
+
+  # set things up for BFS
+  for u in G.vertices():
+    seen[u] = False
+    parent[u] = None
+  
+  seen[u] = True
+  layers = []
+  current = [s]
+  next = []
+
+  # process current layer
+  while not current.is_empty():
+    layers.append(current)
+    # iterate over current layer
+    for u in current:
+      for v in G.incient(u):
+        if not seen[v]:
+          next.append(v)
+          seen[v] = True
+          parent[v] = u
+
+    # update current and next layers
+    current = next
+    next = []
+  
+  return layers, parent
+```
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/bfseg.png" width="auto" height="auto">
+</p>
