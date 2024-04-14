@@ -466,7 +466,7 @@ For every $u$ in $V$, compute $\text{level}[u]$, its level in the DFS tree.
 
 For every vertex $v$, compute the highest level that we can reach by taking DFS edges down the tree, and then one back edge up. This is ```down_and_up[v]```.
 
-A DFS edge $(u, v)$, where $u=\text{parent}[v]$ is not a cut edge if and only if $\text{down_and_up}[v] \ge \text{level}[v]$.
+A DFS edge $(u, v)$, where $u=\text{parent}[v]$ is not a cut edge if and only if ```{down_and_up}[v]``` $\ge \text{level}[v]$.
 
 <p align="center">
     <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/cutedge.png" width="auto" height="auto">
