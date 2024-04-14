@@ -62,7 +62,7 @@ Modelling
 
 A **path** is a sequence of vertices such that every pair of consecutive vertices is connected by an edge.
 
-A simple path is one where all vertices are distinct. 
+A simple path is one where all vertices are distinct.
 
 <p align="center">
     <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/path.png" width="500" height="auto">
@@ -323,7 +323,7 @@ An unrooted tree $T$ is a graph such that:
 - T is connected
 - T has no cycles
 
-A forest is a graph wihtout cycles - its connected components are trees. 
+A forest is a graph wihtout cycles - its connected components are trees.
 
 Every tree on $n$ vertices has $n-1$ edges.
 
@@ -416,7 +416,7 @@ def DFS_visit(u):
 
 Takes $O(deg(u))$ time not counting work done in recursive calls to ```DFS_visit```.
 
-Therefore the overall time is $O(\sum{u}deg(u)) = O(m)$, where $m$ is the number of edges. 
+Therefore the overall time is $O(\sum{u}deg(u)) = O(m)$, where $m$ is the number of edges.
 
 ### Properties of DFS
 
@@ -454,6 +454,14 @@ The cut edge problem is to identify all cut edges.
 
 For each edge $(u,v)$, in $E$, remove $(u,v)$ and check using DFS if $G$ is still connected, put back $(u,v)$.
 
-#### $O(nm)$ time algorithm
+#### $O(n+m)$ time algorithm
 
-Only test edges in a DFS tree of $G$
+Only test edges in a DFS tree of $G$.
+
+Compute a DFS tree of the input graph $G=(V,E)$.
+
+For every $u$ in $V$, compute $\text{level}[u]$, its level in the DFS tree.
+
+For every vertex $v$, compute the highest level that we can reach by taking DFS edges down the tree, and then one back edge up. This is ```down_and_up[v]```.
+
+A DFS edfe $(u, v)$, where
