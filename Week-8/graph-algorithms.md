@@ -180,3 +180,34 @@ Dijkstra's may not work for negative-weight edges, Where even if $D[v]$ is the s
     <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/new.png" width="500" height="auto">
 </p>
 
+## Minimum Spanning Trees
+
+Given a connected graph $G=(V,E)$, with real-valued edge weights $c_{e}$, an MST (minimum spanning tree) is a subset of the edges $T \subseteq E$ such that $T$ is a spanning tree who sum of edge weights is minimised. 
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/mst.png" width="500" height="auto">
+</p>
+
+### MST Properties
+
+**Simplifying Assumptiong**: All edge costs $c_{e}$ are distinct.
+
+**Cut Property**: Let $S$ be any subset of nodes, and let $e$ be the min-cost edge with exactly one endpoint in $S$. Then the MST contains $e$.
+- This property is used to determine whether an edge should be included in the MST. A cut in a graph is a partition of the vertices into two non-empty disjoint subsets. The cut property states that for any cut that respects the MST (meaning no edge in the MST crosses the cut), the minimum weight edge that crosses the cut is in the MST.
+
+**Cycle Property**: Let $C$ be any cycle, and let $f$ be the max cost edge belonging to $C$. Then the MST does not contain $f$.
+- A cycle in a graph is a path that starts and ends at the same vertex and includes at least one other vertex. The cycle property states that the maximum weight edge on any cycle of the graph does not belong to the MST. This is because including the edge would create a cycle in the MST, and removing it would result in a spanning tree with a smaller total weight.
+
+### Cycles and Cuts
+
+**Cycle**: A set of edges of the form $a-b, b-c, c-d, \dots y-z, z-a$.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/cyc.png" width="500" height="auto">
+</p>
+
+**Cutset**: A cut is a subset of nodes $S$, the corresponding cutset $D$ is the subset of edges with exactly one endpoint in $S$.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/cutset.png" width="500" height="auto">
+</p>
