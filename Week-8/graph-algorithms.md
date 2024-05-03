@@ -211,3 +211,89 @@ Given a connected graph $G=(V,E)$, with real-valued edge weights $c_{e}$, an MST
 <p align="center">
     <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/cutset.png" width="500" height="auto">
 </p>
+
+It looks like there is nothing actually in the cut, but every edge that touches the cut is in the cutset. And it only includes edges which touch the cut.
+
+#### Cycle-Cut Intersection
+
+**Our claim is**: A cycle and a cutset intersect in an even number of edges. 
+
+### Proving the Cut Property
+
+**Simplifying assumption**: All edge costs $c_{e}$ are distinct.
+
+**Cut property**: Let $S$ be any subset of nodes, and let $e$ be the min-cost edge with exactly one endpoint in $S$. Then the MST contains $e$. (I think this basically means, we have a group of nodes, S. Then, in order to like "access" this group of nodes, we would use the lowest cost edge that connects to this group of nodes. This edge would be in the MST. Because, if it wasn't, then we would have to use a higher cost edge to access the group of nodes, which would mean the MST would have a higher cost.)
+
+**Proof** (exchange argument): 
+- Let $T*$ be the MST and suppose $e$ does not belong to $T*$.
+- Adding $e$ to $T*$ creates a cycle $C$ in $T*$.
+- Edge $e$ is both in the cycle $C$ and in the cutset $D$ corresponding to $S$.
+- $T' = T* \cup \{e\} - \{f\}$ is a spanning tree with $c(T') < c(T*)$.
+- Since $c_{e} < c_{f}, \text{cost}(T') < \text{cost}(T*)$, we have a contradiction.
+
+## Prim's Algorithm
+
+### Psuedocode
+
+```
+def prim(G, c):
+    u <- arbitrary vertex in V
+    S <- {u}
+    T <- {}
+    while |S| < |V|:
+        (u, v) = min-cost edge with exactly one endpoint in S (u in S and v not in S)
+        add (u, v) to T
+        add v to S
+    return T
+```
+
+### Implementation
+
+We need to also implement how we will search for an edge, and add an edge.
+
+The main idea is that for every $v \text{ in } V\setminus{S}$, we want to find the edge $(u,v)$ with the smallest cost such that $u \text{ in } S$. We keep:
+- $d[v]$: the distance to closest neighbour in $S$
+- $parent[v]$: closest neighbour in $S$
+
+```
+def prim(G, c){
+    for v in V:
+        d[v] = inf
+        parent[v] = None
+    u = arbitrary vertex in V
+    d[u] = 0
+    Q = new Priority Queue for {(v, d[v]): v in V}
+    S = {}
+
+    while Q is not empty:
+        u = Q.remove_min()
+        add u to S
+        for (u, v) incident to u:
+            if v not in S and c(u,v) < d[v]:
+                parent[v] = u
+                decrease priority d[v] to c(u,v)
+    return parent
+}
+```
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/prim1.png" width="500" height="auto">
+</p>
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/prim2.png" width="500" height="auto">
+</p>
+
+### Prim's Algorithm Complexity
+
+Similar analyssi to Dijkstra's algorithm:
+- $O(mlogn)$ with a heap
+- $O(m + nlogn)$ with a Fibonacci heap
+
+## Kruskal's Algorithm - Union Find ADT
+
+Consider edges in ascending order of weight.
+
+**Case 1**: If adding $e$ to $T$ creates a cycle, discard $e$ according to cycle property.
+
+**Case 2**: Otherwise, insert $e = (u,v)$ into $T$ according to cut property where $S$ is the set of nodes in $u$'s connected component.
