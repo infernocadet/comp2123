@@ -56,7 +56,7 @@ High level idea:
 
 Initially:
 - $D[s] = 0$
-- $D[v] = \infty$ for all $v \in V\ussetmin{s}$
+- $D[v] = \infty$ for all $v \in V\setminus{s}$
 
 In each iteration we:
 - add to $S$, vertex $u \in V\setminus{S}$ with smallest $D[u]$
@@ -297,3 +297,69 @@ Consider edges in ascending order of weight.
 **Case 1**: If adding $e$ to $T$ creates a cycle, discard $e$ according to cycle property.
 
 **Case 2**: Otherwise, insert $e = (u,v)$ into $T$ according to cut property where $S$ is the set of nodes in $u$'s connected component.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/kru.png" width="500" height="auto">
+</p>
+
+Holy shit this is so intuitive, look at the following photo:
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/krus.png" width="500" height="auto">
+</p>
+
+Basically, we considered all the smallest edges first (F, E) & (G, D) and we just added that to our set. These edges did not create a cycle so we continued. Then we considered the next smallest edges which had a weight of 3 (F, C), (C, D) & (G, H) and we added that to our set. These did not create a cycle so we added all of them. Then we considered the next smallest edges which had weight 4 (A, H) & (F, D). As you can see including (F, D) in our set would create a cycle and so we would not include that.
+
+### Kruskal's Time Complexity
+
+Sorting edges takes $O(mlogm)$ time. We need to be able to test if adding a new edge creates a cycle, in which we can skip the edge. One option is to run DFS in each iteration to see if the number of connected components stays the same. This leads to $O(mn)$ time for the main loop. 
+
+We can do better by keeping track of the connected components with a data structure.
+
+## Union Find ADT
+
+This is a data structure defined on a ground set (like a universal set) of elements $A$. It is used to keep track of an evolving partition of $A$. A partition is a collection of disjoint sets whose union is $A$.
+
+We want to support the following operations:
+- `make_sets(A)`: Makes $|A|$ singleton setswith elements in $A$
+- `find(a)`: Returns an id for the set element $a$ belongs to
+- `union(a,b)`: Merges the sets containing $a$ and $b$
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/usa.png" width="500" height="auto">
+</p>
+
+### Kruskal's Algorithm with Union Find
+
+If we have this data structure, then Kruskal's can be implemented:
+
+```
+def kruskal(G, c)
+    sort E in increasing c-value
+    answer = []
+    comp = make_sets(V)
+    for (u, v) in E:
+        if comp.find(u) != comp.find(v):
+            answer.append((u, v))
+            comp.union(u, v)
+    return answer
+```
+
+Union find operations:
+- `make_sets(A)`: one call with $|A| - |V|$
+- `find(a)`: $2(m)$ calls
+- union(a,b): $n-1$ calls
+
+### Simple union-find implementation
+
+Sets are represented with lists. An array points to the set each element belongs to:
+- `make_sets(A)` creates and initialises the array
+- `find(u)` is a simple lookup in the array
+- `union(u, v)` adds elements in $u$'s set to $v$'s set
+
+Time complexity:
+- `make_sets(A)` takes $O(n)$ time, where $n = |A|$
+- `find(u)` takes $O(1)$ time
+- `union(u, v)` takes $O(n)$ $ time.
+
+Kruskals algorithm would run in $O(n^{2})$ time after edge weights are sorted.
