@@ -135,3 +135,32 @@ def interval_partition(S):
             d <- d + 1
         return d
 ```
+
+**Implementation**: $O(n logn)$ to sort, $O(n)$ to process.
+
+- For each classroom $k$, maintain the finish time of the last job added. Keep the classrooms in a priority queue.
+
+### Interval Partitioning: Greedy Analysis
+
+Observation: Greedy algorithm never schedules two incompatible lectures in the same classroom.
+
+Theorem: Greedy algorithm is optimal.
+
+Proof:
+
+- $d$ = number of classrooms that the greedy algorithm allocates
+- Classroom $d$ is opened because we needed to schedule a job, say $i$ that is incompatible iwth all $d-1$ other classrooms.
+- Since we sorted by start time, all these incompatibilities are caused by lectures that start no later than $s_{j}$.
+- Thus, we have $d$ lectures overlapping at time $s_{j} + \epsilon$.
+- Key observation -> all schedules use $\ge d$ classrooms.
+
+## Huffman's Algorithm
+
+### Text Compression
+
+Given: a string X
+Goal: efficiently encode X into a smaller string Y (saves memory or bandwidth).
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/tcomp.png" width="350" height="auto">
+</p>
