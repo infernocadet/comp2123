@@ -245,3 +245,7 @@ Basically just means, we ensure shortest encoding by having the highest frequenc
 <p align="center">
     <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/otr.png" width="350" height="auto">
 </p>
+
+### Huffman's Algorithm Analysis
+
+Time complexity is dominated by PQ operations, which, using heap takes $O(|C| log |C|)$ time.
