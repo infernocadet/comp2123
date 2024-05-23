@@ -164,3 +164,84 @@ Goal: efficiently encode X into a smaller string Y (saves memory or bandwidth).
 <p align="center">
     <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/tcomp.png" width="350" height="auto">
 </p>
+
+**Huffman encoding** is a better approach.
+
+- Let C be the set of characters in X.
+- Compute frequency $f(c)$ for each character $c$ in $C$.
+- Encode high-frequency characters with short code words
+- No code word is a prefix of another code word
+- Use an optimal encoding tree to determine the code words.
+
+### Encoding Tree Example
+
+- A **binary code** is a mapping of each character of an alphabet to a binary code-word
+- A **prefix code** is a code such that no code-word is the prefix of another code-word
+- An **encoding tree** represents a prefix code
+  - Each external node stores a character
+  - The code-word of a character is given by the path from the root to the external node storing the character (0 for a left child and 1)
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/entree.png" width="350" height="auto">
+</p>
+
+### Encoding Tree Optimisation
+
+- Given a test string X, find a prefix code for the characters of X that yields a small encoding for X
+  - Frequent characters should have short code-words
+  - Rare characters should have long code-words
+- Example:
+  - X = abracadabra
+  - $T_{1}$ encodes $X$ into 29 bits
+  - $T_{2}$ encodes $X$ into 24 bits
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/abra.png" width="350" height="auto">
+</p>
+
+### Huffman's Algorithm Continued
+
+Given a string $X$, Huffmans constructs a prefix code that minimises the size of the encoding of $X$. It runs in time $O(n + d log d)$, where $n$ is the size of $X$ and $d$ is the number of distinct characters of $X$.
+
+The algorithm builds the encoding tree from the bottom up, merging trees as it goes along, using a priority queue to guide the process.
+
+End result minimises bits needed to encode $X$.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/encode.png" width="350" height="auto">
+</p>
+
+```
+def huffman(C, f):
+    # initialise priority queue
+    Q <- empty priority queue
+    for c in C do:
+        T <- single-node binary tree storing c
+        Q.insert(f[c], T)
+
+    # merge trees while at least two trees
+    while Q.size() > 1 do:
+        f1, t1, <- Q.remove_min()
+        f2, t2, <- Q.remove_min()
+        T <- new binary tree with T1/T2 as left/right subtrees
+        f <- f1 + f2
+        Q.insert(f, T)
+
+    # return remaining tree
+    f, T <- Q.remove_min()
+    return T
+```
+
+We are making a priority queue, with a single node tree representing a character in the string, and the trees are placed in the priority queue based on its frequency.
+
+### Huffman's Algorithm Correctness
+
+**Observation**: In an optimal encoding tree #T# for any $a$ and $b$ in $C$, if $\text{depth}_{T}(a) \lt \text{depth}_{T}(b)$ then $f(a) \ge f(b)$.
+
+Basically just means, we ensure shortest encoding by having the highest frequency characters closer to the root of the tree. If the frequency of a character is higher, but its depth in the tree is also higher, than swapping it with a node with a lesser frequency which is closer to the root of the tree will result in a shorter encoding.
+
+**Observation**: If we combine the two lowest frequency characters to get a new instance $(C', f')$, an optimal encoding tree $T'$ for $(C', f')$ can be expanded to get an optimal encoding tree $T$ for $(C, f)$.
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/otr.png" width="350" height="auto">
+</p>
