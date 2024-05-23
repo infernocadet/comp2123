@@ -78,15 +78,16 @@ Together with information about the base case, we can set up a recurrence for $T
 **Conquer step**: (return answer from recur step): $O(1)$
 
 Now we set up the recurrence for $T(n)$:
-\[
+
+$$
 T(n) =
 \begin{cases}
 T(n/2) + O(1) & \text{for } n > 1 \\
 O(1) & \text{for } n = 1
 \end{cases}
-\]
+$$
 
-This solves to \[T(n) = O(\log n)\] as we can only halve the input $O(logn)$ times before reaching a base case.
+This solves to $$T(n) = O(\log n)$$ as we can only halve the input $O(logn)$ times before reaching a base case.
 
 ## Proof by Unrolling
 
