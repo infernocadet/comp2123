@@ -51,3 +51,50 @@ We can see that E and F are in the maxima set of the Left set. However, they wou
 <p align="center">
     <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/maxi.png" width="350" height="auto">
 </p>
+
+Some observations:
+
+1. Every point in MS of the whole is in Left MS or Right MS
+2. Every point in Right MS is in MS of whole
+3. Every point in Left MS is either in MS of whole or dominated by p, in which case, p is the left most point in Right MS.
+
+Then, our conquer step would be:
+
+1. Find the leftmost point $p$ in right MS
+2. Compare every point $q$ in the Left MS to this point - If q.y > p.y, add q to the merged MS
+3. Add every point in right MS to the Merged MS
+
+Base case:
+A set containing a single point
+
+### Maxima-set: Analysis
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/mset.png" width="350" height="auto">
+</p>
+
+## Integer Multiplication
+
+Given: two n-digit integers x and y
+
+Problem: compute the product x y
+
+### Naive approach
+
+Assume that two digits can be multiplied or added in constant time. We perform O(n^2) operations to compute the product.
+
+### Divide and conquer
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/mult.png" width="350" height="auto">
+</p>
+
+We can compute the product of two n-digit numbers by making 4 recursive calls on n/2 digit numbers and then combining the solutions to the subproblems.
+
+### Implementation
+
+<p align="center">
+    <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/muimp.png" width="350" height="auto">
+</p>
+
+## Master Theorem
