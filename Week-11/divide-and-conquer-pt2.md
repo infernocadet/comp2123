@@ -98,3 +98,207 @@ We can compute the product of two n-digit numbers by making 4 recursive calls on
 </p>
 
 ## Master Theorem
+
+Let f(n) and T(n) be defined as follows:
+T(n) =
+Case 1: aT(n/b) + f(n) if n >= d
+Case 2: c if n < d
+
+Depending on a, b and f(n), the recurrence solves to one of three cases:
+
+1. if $f(n) = O(n^{log_{b}a-\epsilon})$ for $\epsilon > 0$, then $T(n) = \Theta(n^{log_{b}a})$ (this just means, that if c is less than the log value, then the overall time complexity takes the dominant log value)
+2. if $f(n) = \Theta(n^{log_{b}a}log^{k}n)$, for $k \ge 0$ then $T(n) = \Theta(n^{log_{b}a} log^{k+1}n)$. (this just means, if f(n) is some multiple of logn, then the time complexity is the log value to the power of k + 1)
+3. if $f(n) = \Omega(n^{log_{b}a+\epsilon})$ and $\epsilon > 0$ then $T(n) = \Theta(f(n))$ (this just means, if c is greater than the log value, then the overall time complexity takes the dominant c value)
+
+$8T(n/2) + n^2$
+
+$$
+a = 8
+b = 2
+f(n) = n^2
+log_{b}a = log_{2}8 = 3
+f(n) = n^2
+$$
+
+$\text{if the } log_{b}a \text{ value is greater than } f(n) \text{ then it is case 1}$
+
+\[ T(n) = aT\left(\frac{n}{b}\right) + f(n) \]
+
+In your case:
+
+- \( a = 2 \)
+- \( b = 2 \)
+- \( f(n) = O(n) \)
+
+The Master Theorem provides three cases for solving such recurrences:
+
+1. **Case 1**: If \( f(n) = O(n^c) \) where \( c < \log_b a \)
+2. **Case 2**: If \( f(n) = O(n^c) \) where \( c = \log_b a \)
+3. **Case 3**: If \( f(n) = O(n^c) \) where \( c > \log_b a \)
+
+### Step 1: Compute \( \log_b a \)
+
+Here, \( a = 2 \) and \( b = 2 \):
+
+\[
+\log_b a = \log_2 2 = 1
+\]
+
+### Step 2: Compare \( f(n) \) with \( n^{\log_b a} \)
+
+In this case, \( f(n) = O(n) \), which is equivalent to \( n^1 \).
+
+Thus, we compare \( n^1 \) with \( n^{\log_2 2} = n^1 \):
+
+\[
+f(n) = O(n) \implies f(n) = O(n^1)
+\]
+
+Since \( f(n) = O(n^1) \) and \( \log_b a = 1 \), we fall into **Case 2** of the Master Theorem.
+
+### Step 3: Apply Case 2 of the Master Theorem
+
+**Case 2** states that if \( f(n) = \Theta(n^{\log_b a}) \), then:
+
+\[
+T(n) = \Theta(n^{\log_b a} \log n)
+\]
+
+Since \( \log_b a = 1 \):
+
+\[
+T(n) = \Theta(n^1 \log n) = \Theta(n \log n)
+\]
+
+### Conclusion
+
+Therefore, the solution to the recurrence relation \( T(n) = 2T(n/2) + O(n) \) using the Master Theorem is:
+
+\[
+T(n) = \Theta(n \log n)
+\]
+
+Let's solve the recurrence relation \( T(n) = 2T(n/2) + n \log n \) using the Master Theorem.
+
+### Step 1: Identify the parameters
+
+The recurrence relation is of the form:
+\[ T(n) = aT\left(\frac{n}{b}\right) + f(n) \]
+
+For this recurrence:
+
+- \( a = 2 \)
+- \( b = 2 \)
+- \( f(n) = n \log n \)
+
+### Step 2: Compute \( \log_b a \)
+
+\[
+\log_b a = \log_2 2 = 1
+\]
+
+### Step 3: Compare \( f(n) \) with \( n^{\log_b a} \)
+
+Here, \( f(n) = n \log n \) and \( n^{\log_b a} = n^1 = n \).
+
+We need to compare \( f(n) = n \log n \) with \( n \).
+
+### Step 4: Determine which case of the Master Theorem applies
+
+- **Case 1**: If \( f(n) = O(n^c) \) where \( c < \log_b a \)
+- **Case 2**: If \( f(n) = \Theta(n^{\log_b a}) \)
+- **Case 3**: If \( f(n) = \Omega(n^c) \) where \( c > \log_b a \)
+
+Let's see which case applies:
+
+1. **Case 1**: If \( f(n) = O(n^c) \) where \( c < \log_b a \)
+
+   Here, \( f(n) = n \log n \) and \( \log_b a = 1 \). Since \( n \log n \) grows faster than \( n \), this case does not apply.
+
+2. **Case 2**: If \( f(n) = \Theta(n^{\log_b a}) \)
+
+   Here, \( f(n) = n \log n \) and \( n^{\log_b a} = n \). Since \( n \log n \) grows faster than \( n \), this case does not apply either.
+
+3. **Case 3**: If \( f(n) = \Omega(n^c) \) where \( c > \log_b a \)
+
+   Here, \( f(n) = n \log n \) and \( n^{\log_b a} = n \). Since \( n \log n \) grows faster than \( n \), this falls under Case 3.
+
+### Case 3 of the Master Theorem states:
+
+If \( f(n) = \Omega(n^c) \) where \( c > \log_b a \), and if \( af(n/b) \leq kf(n) \) for some \( k < 1 \) and sufficiently large \( n \), then:
+\[
+T(n) = \Theta(f(n)) = \Theta(n \log n)
+\]
+
+### Verification of Regularity Condition
+
+The regularity condition requires:
+\[
+af(n/b) \leq kf(n)
+\]
+
+Here:
+\[
+2 \cdot \frac{n}{2} \log \left(\frac{n}{2}\right) \leq k \cdot n \log n
+\]
+
+Simplifying the left side:
+\[
+n \log \left(\frac{n}{2}\right) = n \log n - n \log 2 = n \log n - n
+\]
+
+So we need:
+\[
+n \log n - n \leq k n \log n
+\]
+
+For large \( n \), this holds if \( k \) is chosen appropriately (e.g., \( k = 1 \)).
+
+### Conclusion
+
+The solution to the recurrence relation \( T(n) = 2T(n/2) + n \log n \) is:
+\[
+T(n) = \Theta(n \log n)
+\]
+
+Thus, this recurrence relation falls into **Case 2** of the Master Theorem as well.
+
+## Selection
+
+Given an unsorted array A holding n numbers and an integer k, find the kth smallest number in A.
+
+Our trivial solution is to sort the elements and return the kth element.
+
+Can we do better than $O(nlogn)$? We can, with divide and conquer.
+
+### Algorithm Description:
+
+1. Find median of array, [n/2], and split the array into numbers which are less than A[n/2] and larger than A[n/2]. Note these sub-arrays are still unsorted, however, they are split by the median.
+2. If k is <= to n/2 (index of median), then we will recursively find the element on the half with the smaller numbers. If k is > to n/2, then we will recursively find the element on the half with the larger numbers.
+3. Return value of recursive calls
+
+### Selection Time Complexity
+
+Divide step (find median and split) takes at least $O(n)$ time.
+Recur step (solve left or right subproblem) takes $T(n/2)$.
+Conquer (return recursive result) takes $O(1)$.
+
+If we could compute the median in $O(n)$ time, then the time complexity would be $T(n) = T(n/2) + O(n)$ for $n>1$, and $O(1)$ for $n = 1$.
+
+### Approximating the median
+
+We don't need the exact median - suppose we could find in $O(n)$ time, an element $x$ in $A$ such that:
+
+$$
+|A| / 3 \leq rank(A, x) \le 2|A| / 3
+$$
+
+Then we get the recurrence:
+
+$$
+T(n) = \\
+\text{case 1: } T(2n/3) + O(n) \text{ for } n > 1 \\
+\text{case 2: } O(1) \text{ for } n = 1
+$$
+
+This solves to $T(n) + O(n)$.
