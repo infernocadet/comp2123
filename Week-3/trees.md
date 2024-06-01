@@ -187,7 +187,9 @@ Binary tree associated with arithmetic expression:
 - internal nodes: operators
 - external nodes: operands
 
-An example arithmetic expression tree for $$(2 * (a - 1) + (3 * b))$$
+An example arithmetic expression tree for 
+
+$$(2 * (a - 1) + (3 * b))$$
 
 <p align="center">
     <img src="https://github.com/infernocadet/comp2123/blob/main/graphics/arithmetic.png" alt="comparison" width="350" height="auto">
